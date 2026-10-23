@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Пишемо разом · Writing Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="studio.css">
+</head>
+<body data-mode="script">
+
+<header class="top">
+  <div class="brand"><b>Target English</b><span>Write It Right · IELTS Writing Task 1</span></div>
+  <div class="modes" role="tablist" aria-label="Режим">
+    <button role="tab" data-mode="script" class="on">Сценарій</button>
+    <button role="tab" data-mode="live">Живий режим</button>
+  </div>
+  <div class="tools">
+    <button id="tmr" class="tbtn" title="Таймер 20 хвилин">⏱ <span id="tmrTxt">20:00</span></button>
+    <button id="tmrReset" class="tbtn sq" title="Скинути таймер">↺</button>
+    <button id="fsm" class="tbtn sq" title="Менший шрифт відповіді">A−</button>
+    <button id="fsp" class="tbtn sq" title="Більший шрифт відповіді">A+</button>
+    <button id="full" class="tbtn" title="Повний екран (F)">Повний екран</button>
+    <button id="clean" class="tbtn" title="Чистий екран для запису (C)">Чистий екран</button>
+  </div>
+</header>
+
+<main>
+  <!-- ЛІВОРУЧ: завдання й графік -->
+  <section class="left card">
+    <div class="meta"><span class="pill" id="kicker"></span><span class="pill soft">20 хвилин · 150+ слів</span></div>
+    <div class="prompt">
+      <p id="prompt"></p>
+      <p class="tail" id="promptTail"></p>
+    </div>
+    <figure class="fig">
+      <figcaption id="chartTitle"></figcaption>
+      <div id="chart"></div>
+      <div class="legend" id="legend"></div>
+    </figure>
+  </section>
+
+  <!-- ПРАВОРУЧ: відповідь -->
+  <section class="right">
+    <ol class="steps" id="steps"></ol>
+    <div class="cap" id="cap"></div>
+    <div class="prog"><i id="progBar"></i></div>
+
+    <div class="paper" id="paper"></div>
+
+    <div class="check" id="check" hidden>
+      <h3>Чеклист</h3>
+      <ul id="checkList"></ul>
+      <p class="note">Автоперевірка — орієнтир, а не оцінка.</p>
+    </div>
+
+    <div class="bar">
+      <div class="wcwrap">
+        <div class="wc"><b id="wcNum">0</b> слів <span class="goal">· ціль 150–175</span></div>
+        <div class="meter"><i id="meterFill"></i><u class="m150"></u><u class="m170"></u></div>
+      </div>
+      <div class="ctrl script-only">
+        <label class="speed">Темп друку
+          <input type="range" id="speed" min="6" max="40" step="1" value="16">
+        </label>
+        <button class="tbtn" id="prev" title="Назад (←)">← Назад</button>
+        <button class="tbtn pri" id="next" title="Далі (Пробіл)">Далі · Пробіл</button>
+        <button class="tbtn" id="restart" title="Спочатку (R)">Спочатку</button>
+        <button class="tbtn" id="copyBtn2">Копіювати текст</button>
+      </div>
+      <div class="ctrl live-only">
+        <button class="tbtn" id="checkBtn">Перевірити</button>
+        <button class="tbtn" id="copyBtn">Копіювати текст</button>
+        <button class="tbtn" id="clearBtn">Очистити</button>
+      </div>
+    </div>
+    <p class="keys script-only">Пробіл або → далі · ← назад · R спочатку · F повний екран · C чистий екран</p>
+  </section>
+</main>
+
+<script src="studio.js"></script>
+</body>
+</html>
