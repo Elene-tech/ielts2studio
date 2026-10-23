@@ -75,11 +75,10 @@
       add(g, 'polyline', { 'class': 'ln', points: pts, stroke: se.color });
       var mks = [], vals = [];
       se.data.forEach(function (d, i) {
-        mks.push(g.appendChild(markerEl(se.marker, ix(i), iy(d), se.color)));
+        vals.push(add(g, 'line', { 'class': 'guide', x1: PL, x2: ix(i), y1: iy(d), y2: iy(d), stroke: se.color }));
       });
       se.data.forEach(function (d, i) {
-        var below = se.id === 'read';
-        vals.push(add(g, 'text', { 'class': 'val', x: ix(i), y: below ? iy(d) + 26 : iy(d) - 13, fill: se.color }, d));
+        mks.push(g.appendChild(markerEl(se.marker, ix(i), iy(d), se.color)));
       });
       serG[se.id] = { g: g, mks: mks, vals: vals };
     });
@@ -188,9 +187,9 @@
     var beats = T.beats;
     var idx = -1;              // індекс останнього застосованого біта
     var typing = null;         // {timer, finish()}
-    var cps = parseInt(store('ws-cps'), 10) || 16;
-    $('speed').value = cps;
-    $('speed').addEventListener('input', function () { cps = +this.value; store('ws-cps', cps); });
+    var cps = parseInt(store('ws-cps2'), 10) || 9;
+    $('speed').value = cps; $('speedVal').textContent = cps;
+    $('speed').addEventListener('input', function () { cps = +this.value; $('speedVal').textContent = cps; store('ws-cps2', cps); });
 
     function clearTexts() {
       T.sections.forEach(function (sc) {
@@ -199,12 +198,26 @@
         e.box.classList.remove('active');
       });
     }
+    var langOn = false;
+    var langMap = {}, langRe = null;
+    (function () {
+      var ph = [];
+      Object.keys(T.lang || {}).forEach(function (g) { T.lang[g].list.forEach(function (p) { langMap[p.toLowerCase()] = g; ph.push(p); }); });
+      ph.sort(function (a, b) { return b.length - a.length; });
+      if (ph.length) langRe = new RegExp('(' + ph.map(function (p) { return p.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }).join('|') + ')', 'gi');
+    })();
+    function esc(t) { return t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+    function setSent(sp, text, final) {
+      if (final && langOn && langRe) sp.innerHTML = esc(text).replace(langRe, function (m) { return '<mark class="lg-' + (langMap[m.toLowerCase()] || 'x') + '">' + m + '</mark>'; });
+      else sp.textContent = text;
+    }
     function addSentence(secId, text) {
       var e = secEl[secId];
       var prev = e.txt.querySelectorAll('.s');
       Array.prototype.forEach.call(e.txt.querySelectorAll('.s.cur'), function (x) { x.classList.remove('cur'); });
       if (prev.length) e.txt.insertBefore(document.createTextNode(' '), e.caret);
-      var sp = document.createElement('span'); sp.className = 's cur'; sp.textContent = text;
+      var sp = document.createElement('span'); sp.className = 's cur'; sp.dataset.full = text;
+      setSent(sp, text, !!text);
       e.txt.insertBefore(sp, e.caret);
       return sp;
     }
@@ -279,14 +292,15 @@
       var sp = addSentence(b.sec, '');
       activate(b.sec);
       var i = 0, full = b.text;
-      function done() { sp.textContent = full; updateCount(); }
-      typing = { timer: null, finish: done };
+      sp.dataset.full = full;
+      function done() { setSent(sp, full, true); updateCount(); }
+      typing = { timer: null, finish: done, sp: sp };
       function tick() {
         i++;
         sp.textContent = full.slice(0, i);
         updateCount();
         if (i % 10 === 0) keepVisible(b.sec);
-        if (i >= full.length) { typing = null; return; }
+        if (i >= full.length) { typing = null; setSent(sp, full, true); return; }
         typing.timer = setTimeout(tick, delayFor(full.charAt(i - 1)));
       }
       typing.timer = setTimeout(tick, 380);
@@ -365,6 +379,22 @@
       saveLive(); updateCount(); $('check').hidden = true;
     });
 
+    /* ---------- ПІДСВІЧУВАННЯ МОВИ ---------- */
+    var lk = $('langKey');
+    Object.keys(T.lang || {}).forEach(function (g) {
+      var c = document.createElement('span'); c.className = 'lgchip lg-' + g; c.textContent = T.lang[g].label; lk.appendChild(c);
+    });
+    function toggleLang() {
+      langOn = !langOn;
+      $('langBtn').classList.toggle('on', langOn);
+      lk.hidden = !langOn;
+      Array.prototype.forEach.call(paper.querySelectorAll('.s'), function (sp) {
+        if (typing && typing.sp === sp) return;
+        setSent(sp, sp.dataset.full || sp.textContent, true);
+      });
+    }
+    $('langBtn').addEventListener('click', toggleLang);
+
     /* ---------- КОПІЮВАННЯ ---------- */
     function fullText() {
       return T.sections.map(function (sc) { return secText(sc.id).trim(); }).filter(Boolean).join('\n\n');
@@ -398,7 +428,7 @@
       var items = [
         { ok: total >= T.minWords, t: 'Обсяг: ' + total + ' слів (потрібно ' + T.minWords + '+)' },
         t.intro ? (sharesFourGram(t.intro, T.prompt) ? { ok: false, t: 'Introduction: 4+ слів поспіль збігаються з умовою, перефразуй глибше' } : { ok: true, t: 'Introduction: є, умову перефразовано' }) : { ok: false, t: 'Introduction: немає' },
-        t.overview ? (/\d/.test(t.overview) ? { ok: false, t: 'Overview: є цифри, прибери їх' } : { ok: true, t: 'Overview: є, без цифр' }) : { ok: false, t: 'Overview: немає' },
+        t.overview ? (/\d/.test(t.overview.replace(/\b(19|20)\d{2}\b/g, '')) ? { ok: false, t: 'Overview: є цифри з даних, прибери їх' } : { ok: true, t: 'Overview: є, без цифр з даних' }) : { ok: false, t: 'Overview: немає' },
         { ok: !!(t.body1 && t.body2), t: (t.body1 && t.body2) ? 'Body 1 і Body 2: обидва є' : 'Body 1 і Body 2: бракує абзацу' },
         { ok: found.length >= 3, t: 'Слова-зв’язки: ' + found.length + (found.length >= 3 ? '' : ' (бажано 3+)') + (found.length ? ' — ' + found.join(', ') : '') }
       ];
@@ -459,17 +489,27 @@
     });
     $('tmrReset').addEventListener('click', function () { clearInterval(tmrId); tmrId = null; left = 20 * 60; $('tmr').classList.remove('run', 'low'); showTmr(); });
 
+    /* ---------- ДОВІДНИК ---------- */
+    function helpOpen() { return !$('help').hidden; }
+    function toggleHelp(on) { $('help').hidden = (on === undefined) ? helpOpen() : !on; }
+    $('helpBtn').addEventListener('click', function () { toggleHelp(true); });
+    $('helpClose').addEventListener('click', function () { toggleHelp(false); });
+    $('help').addEventListener('click', function (e) { if (e.target === this) toggleHelp(false); });
+
     /* ---------- КЛАВІАТУРА ---------- */
     document.addEventListener('keydown', function (e) {
       var tag = (e.target && e.target.tagName) || '';
       if (tag === 'TEXTAREA' || tag === 'INPUT' && e.target.type !== 'range') return;
       if (e.ctrlKey || e.metaKey || e.altKey) return;
       var k = e.key;
+      if (helpOpen()) { if (k === 'Escape' || k === 'h' || k === 'H' || k === 'р' || k === 'Р' || k === '?') { e.preventDefault(); toggleHelp(false); } else if (k === ' ') e.preventDefault(); return; }
+      if (k === 'h' || k === 'H' || k === 'р' || k === 'Р' || k === '?') { toggleHelp(true); return; }
       if (mode === 'script') {
         if (k === ' ' || k === 'ArrowRight' || k === 'Enter') { if (tag === 'BUTTON' && k !== 'ArrowRight') { /* кнопка сама спрацює від Enter/пробілу */ e.preventDefault(); } else e.preventDefault(); next(); return; }
         if (k === 'ArrowLeft' || k === 'Backspace') { e.preventDefault(); prev(); return; }
         if (k === 'r' || k === 'R' || k === 'к' || k === 'К') { restart(); return; }
       }
+      if (mode === 'script' && (k === 'l' || k === 'L' || k === 'д' || k === 'Д')) toggleLang();
       if (k === 'f' || k === 'F' || k === 'а' || k === 'А') toggleFull();
       if (k === 'c' || k === 'C' || k === 'с' || k === 'С') toggleClean();
     });

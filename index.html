@@ -24,6 +24,7 @@
     <button id="fsp" class="tbtn sq" title="Більший шрифт відповіді">A+</button>
     <button id="full" class="tbtn" title="Повний екран (F)">Повний екран</button>
     <button id="clean" class="tbtn" title="Чистий екран для запису (C)">Чистий екран</button>
+    <button id="helpBtn" class="tbtn sq" title="Довідник по кнопках (H)">?</button>
   </div>
 </header>
 
@@ -46,6 +47,7 @@
   <section class="right">
     <ol class="steps" id="steps"></ol>
     <div class="cap" id="cap"></div>
+    <div class="langkey script-only" id="langKey" hidden></div>
     <div class="prog"><i id="progBar"></i></div>
 
     <div class="paper" id="paper"></div>
@@ -63,11 +65,12 @@
       </div>
       <div class="ctrl script-only">
         <label class="speed">Темп друку
-          <input type="range" id="speed" min="6" max="40" step="1" value="16">
+          <input type="range" id="speed" min="3" max="30" step="1" value="9"><span id="speedVal" class="speedval">9</span>
         </label>
         <button class="tbtn" id="prev" title="Назад (←)">← Назад</button>
         <button class="tbtn pri" id="next" title="Далі (Пробіл)">Далі · Пробіл</button>
         <button class="tbtn" id="restart" title="Спочатку (R)">Спочатку</button>
+        <button class="tbtn" id="langBtn" title="Підсвітити мову: наближення, порівняння, дієприкметники (L)">Мова</button>
         <button class="tbtn" id="copyBtn2">Копіювати текст</button>
       </div>
       <div class="ctrl live-only">
@@ -76,9 +79,61 @@
         <button class="tbtn" id="clearBtn">Очистити</button>
       </div>
     </div>
-    <p class="keys script-only">Пробіл або → далі · ← назад · R спочатку · F повний екран · C чистий екран</p>
+    <p class="keys script-only">Пробіл або → далі · ← назад · R спочатку · L підсвітити мову · F повний екран · C чистий екран</p>
   </section>
 </main>
+
+
+<div class="help" id="help" hidden role="dialog" aria-modal="true" aria-label="Довідник по кнопках">
+  <div class="help-box">
+    <div class="help-top"><h2>Довідник по кнопках</h2><button class="tbtn sq" id="helpClose" title="Закрити (Esc)">✕</button></div>
+    <div class="help-grid">
+      <section>
+        <h3>Режим «Сценарій»</h3>
+        <dl>
+          <dt><kbd>Пробіл</kbd> <kbd>→</kbd> <kbd>Enter</kbd></dt><dd><b>Далі.</b> Наступний крок. Якщо речення ще друкується, дописує його одразу.</dd>
+          <dt><kbd>←</kbd> <kbd>Backspace</kbd></dt><dd><b>Назад.</b> Прибирає останній крок.</dd>
+          <dt><kbd>R</kbd></dt><dd><b>Спочатку.</b> Скидає все до початку.</dd>
+          <dt><kbd>L</kbd></dt><dd><b>Мова.</b> Підсвічує наближення, порівняння й дієприкметники. Ще раз вимикає.</dd>
+          <dt>Повзунок</dt><dd><b>Темп друку.</b> Правіше швидше. Запам’ятовується.</dd>
+          <dt>Копіювати текст</dt><dd>Копіює всю відповідь у буфер.</dd>
+        </dl>
+      </section>
+      <section>
+        <h3>Режим «Живий»</h3>
+        <dl>
+          <dt>Кроки зверху</dt><dd>Клік переходить до кроку: Графік, Дані, Intro, Overview, Body 1, Body 2, Перевірка.</dd>
+          <dt>Легенда під графіком</dt><dd>Клік виділяє лінію, ще клік скасовує.</dd>
+          <dt>Перевірити</dt><dd>Чеклист: обсяг, структура, зв’язки.</dd>
+          <dt>Копіювати текст</dt><dd>Копіює відповідь.</dd>
+          <dt>Очистити</dt><dd>Стирає всі чотири поля.</dd>
+          <dt>Автозбереження</dt><dd>Текст лишається в браузері після перезавантаження.</dd>
+        </dl>
+      </section>
+      <section>
+        <h3>Для запису відео</h3>
+        <dl>
+          <dt><kbd>F</kbd></dt><dd><b>Повний екран.</b> Esc виходить.</dd>
+          <dt><kbd>C</kbd></dt><dd><b>Чистий екран.</b> Ховає кнопки й підказки. Ще раз <kbd>C</kbd> повертає.</dd>
+          <dt>A− / A+</dt><dd>Розмір шрифту відповіді.</dd>
+          <dt>⏱ 20:00</dt><dd>Таймер: клік запускає й зупиняє, за 5 хвилин до кінця стає помаранчевим.</dd>
+          <dt>↺</dt><dd>Скидає таймер на 20:00.</dd>
+          <dt><kbd>H</kbd> <kbd>?</kbd></dt><dd>Цей довідник. Закрити: <kbd>Esc</kbd>.</dd>
+        </dl>
+      </section>
+      <section class="flow">
+        <h3>Порядок запису відео</h3>
+        <ol>
+          <li><kbd>F</kbd> повний екран. Постав темп друку повзунком.</li>
+          <li><kbd>C</kbd> чистий екран (кнопки зникнуть), увімкни запис.</li>
+          <li><kbd>Пробіл</kbd>: графік, дані, речення по одному. Коментуй кожен крок.</li>
+          <li>Наприкінці <kbd>L</kbd>: покажи наближення, порівняння, дієприкметники.</li>
+          <li>Останній <kbd>Пробіл</kbd> показує чеклист.</li>
+        </ol>
+      </section>
+    </div>
+  </div>
+</div>
 
 <script src="studio.js"></script>
 </body>
