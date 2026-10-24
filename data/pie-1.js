@@ -60,36 +60,36 @@ window.TASK = {
     { step: 2, cap: 'А де найбільша різниця? Автомобіль і велосипед.',
       hl: { sl: { glen: ['car', 'cycle'], marl: ['car', 'cycle'] } } },
 
-    { step: 3, sec: 'intro', cap: 'Introduction: перефразуємо умову й не копіюємо її.',
-      text: 'The pie charts illustrate the proportion of commuters who used six different means of transport for their daily journey to work in 2023, comparing the cities of Glenford and Marlow.',
+    { step: 3, sec: 'intro', cap: 'Introduction: перефразуємо умову. show → compare, travelled to work → got to work. Умову не копіюємо.',
+      text: 'The pie charts compare the ways in which people in Glenford and Marlow got to work in 2023.',
       hl: { sl: { glen: 'all', marl: 'all' } } },
 
-    { step: 4, sec: 'overview', cap: 'Overview: два головні висновки без цифр.',
-      text: 'Overall, private cars dominated commuting in Glenford, whereas cycling was the single most common choice in Marlow.',
+    { step: 4, sec: 'overview', cap: 'Overview, речення 1: називаємо найбільшу категорію в кожному місті. Без цифр. while = «тоді як», показує контраст.',
+      text: 'Overall, the car was the most common way of getting to work in Glenford, while cycling was the most popular choice in Marlow.',
       hl: { sl: { glen: ['car'], marl: ['cycle'] } } },
-    { step: 4, sec: 'overview',
-      text: 'Public transport, however, was used by a broadly similar proportion of workers in both cities.',
+    { step: 4, sec: 'overview', cap: 'Overview, речення 2: що схоже в обох містах. a similar number of = «приблизно однакова кількість», about a third = «приблизно третина».',
+      text: 'Public transport was used by a similar number of people in both cities, with buses and trains together making up about a third of journeys.',
       hl: { sl: { glen: ['bus', 'train'], marl: ['bus', 'train'] } } },
 
-    { step: 5, sec: 'body1', cap: 'Body 1: Glenford, категорії за рангом від найбільшої до найменшої.',
-      text: 'In Glenford, 38% of commuters drove to work, making the car the dominant choice by a considerable margin.',
+    { step: 5, sec: 'body1', cap: 'Body 1: Glenford. Починаємо з найбільшої частки: цифра + хто/що. the highest figure = «найвищий показник».',
+      text: 'In Glenford, 38% of workers drove, which was the highest figure.',
       hl: { sl: { glen: ['car'] } } },
-    { step: 5, sec: 'body1',
-      text: 'Buses came second at 21%, followed by trains at 14%, while cycling and walking accounted for 12% and 10% respectively.',
-      hl: { sl: { glen: ['bus', 'train', 'cycle', 'walk'] } } },
-    { step: 5, sec: 'body1',
-      text: 'Only 5% of people relied on other means.',
-      hl: { sl: { glen: ['other'] } } },
+    { step: 5, sec: 'body1', cap: 'Ранжуємо далі за порядком: came second = «на другому місці», followed by = «за ним іде». Не просто «and».',
+      text: 'Buses came second at 21%, followed by trains at 14%.',
+      hl: { sl: { glen: ['bus', 'train'] } } },
+    { step: 5, sec: 'body1', cap: 'respectively = «відповідно»: дві цифри для двох категорій у тому ж порядку. Найменшу частку ставимо в кінець.',
+      text: 'Cycling and walking were used by 12% and 10% respectively, and only 5% chose other ways.',
+      hl: { sl: { glen: ['cycle', 'walk', 'other'] } } },
 
-    { step: 6, sec: 'body2', cap: 'Body 2: Marlow і порівняння з Glenford.',
-      text: 'By contrast, cycling was the most popular option in Marlow, making up 31% of journeys, which was more than double the Glenford figure of 12%.',
+    { step: 6, sec: 'body2', cap: 'Body 2: Marlow. by contrast = «навпаки». more than double = «більш ніж удвічі»: порівнюємо з Glenford (31 проти 12).',
+      text: 'In Marlow, by contrast, cycling was the most popular option at 31%, which was more than double the figure for Glenford.',
       hl: { sl: { glen: ['cycle'], marl: ['cycle'] } } },
-    { step: 6, sec: 'body2',
-      text: 'Buses accounted for just under a quarter of trips, at 24%, whereas the car represented a mere 16%, less than half the proportion seen in Glenford.',
+    { step: 6, sec: 'body2', cap: 'accounted for 24% = «склали 24%». less than half = «менше половини» (16 проти 38). Порівнюємо, а не просто перелічуємо.',
+      text: 'Buses accounted for 24%, while only 16% of people used a car, which was less than half the Glenford figure.',
       hl: { sl: { glen: ['car'], marl: ['bus', 'car'] } } },
-    { step: 6, sec: 'body2',
-      text: 'Walking stood at 15%, trains were used by only 9%, and other means, at 5%, matched the Glenford figure.',
-      hl: { sl: { glen: ['other'], marl: ['walk', 'train', 'other'] } } },
+    { step: 6, sec: 'body2', cap: 'Решту категорій коротко: stood at = «становив». Усі категорії названо, нічого не пропущено.',
+      text: 'Walking stood at 15%, trains at 9% and other means at 5%.',
+      hl: { sl: { marl: ['walk', 'train', 'other'] } } },
 
     { step: 7, check: true, cap: 'Перевіряємо за чеклистом: обсяг, структура, зв’язки.',
       hl: {} }
@@ -98,11 +98,11 @@ window.TASK = {
   /* мова, яку підсвічує кнопка «Мова» */
   lang: {
     approx: { label: 'Частки й дроби',
-      list: ['just under a quarter', 'more than double', 'less than half', 'a mere', 'only', 'by a considerable margin', 'the proportion of'] },
+      list: ['more than double', 'less than half', 'only', 'a similar number of', 'about a third', 'the highest figure'] },
     comp:   { label: 'Порівняння',
-      list: ['dominated', 'the dominant choice', 'the single most common choice', 'the most popular option', 'a broadly similar proportion', 'by contrast', 'whereas', 'matched', 'however'] },
+      list: ['the most common way', 'the most popular choice', 'the most popular option', 'by contrast', 'while', 'which was'] },
     part:   { label: 'Структури',
-      list: ['making the car', 'making up', 'followed by', 'accounted for', 'represented', 'respectively', 'came second', 'stood at', 'relied on'] }
+      list: ['came second', 'followed by', 'accounted for', 'respectively', 'stood at', 'used by', 'chose'] }
   },
 
   linking: ['whereas', 'while', 'by contrast', 'in contrast', 'however', 'overall', 'compared with', 'in comparison', 'unlike', 'similarly', 'meanwhile', 'although', 'respectively']

@@ -1,5 +1,5 @@
 /* Module 2 · Pie Charts. Тексти слайдів дослівно з презентації Олени (IELTS_Module2_PieCharts_solar.pptx).
-   Дані діаграм зчитано з її картинки (слайд 8): див. примітку про суму 104% у супровідному повідомленні. */
+   Дані діаграм: сума 100% у кожній (EV charging без сонячних панелей = 11%). */
 window.DECK = {
   meta: {
     docTitle: 'Module 2 · Pie Charts · презентація',
@@ -71,7 +71,7 @@ window.DECK = {
         { n: '01', q: 'What do the charts show?', uk: 'Electricity consumption by end use, compared between solar and non-solar homes', hl: { sl: { solar: 'all', non: 'all' }, legend: true } },
         { n: '02', q: 'Are these time-based charts?', uk: 'NO — both charts show the same moment. Use comparison language, NOT trend verbs.', hl: { sl: { solar: 'all', non: 'all' } } },
         { n: '03', q: 'What is the dominant category in each group?', uk: 'Water heating dominant without solar (31%); electronics & appliances dominant with solar (24%)', hl: { sl: { solar: ['elec'], non: ['water'] } } },
-        { n: '04', q: 'What are the key differences between groups?', uk: 'Electronics & appliances higher with solar; water heating & space cooling much higher without solar', hl: { sl: { solar: ['elec', 'ev'], non: ['water', 'space'] } } }] },
+        { n: '04', q: 'What are the key differences between groups?', uk: 'Electronics & appliances higher with solar; water heating & space cooling much higher without solar', hl: { sl: { solar: ['elec', 'water', 'space'], non: ['elec', 'water', 'space'] } } }] },
 
     { type: 'section', num: '3', title: 'The 4-Paragraph Structure', sub: 'The foundation of every Band 7+ Task 1 answer', section: '4-Paragraph Structure' },
 
@@ -98,7 +98,7 @@ window.DECK = {
 
     { type: 'dual', section: '4-Paragraph Structure', title: '§3 & §4  Body Paragraphs — The Detail', sub: 'One chart per body paragraph — rank the categories, do not just list them',
       cols: [
-        { k: 'gold', head: 'BODY 1  (§3)', items: ['• Describe the solar-panel homes chart in full', '• Name the largest category first, then rank the rest', '• Use specific percentages with proportion language', '• Group same-value categories together (e.g. "each consumed...")'] },
+        { k: 'gold', head: 'BODY 1  (§3)', items: ['• Describe the solar-panel homes chart in full', '• Name the largest category first, then rank the rest', '• Use specific percentages with proportion language', '• Group categories with similar values together (e.g. "...at 12% and 15% respectively")'] },
         { k: 'red',  head: 'BODY 2  (§4)', items: ['• Describe the non-solar homes chart in full', '• Open with contrast language ("By contrast...")', '• Combine two categories into one synthesis claim', '• Handle any data gaps gracefully, if one appears'] }],
       note: '💡  KEY RULE  —  Since each paragraph covers one full chart, keep the ranking order clear — largest to smallest — so the paragraph reads as an analysis, not a list.' },
 
@@ -133,7 +133,7 @@ window.DECK = {
       top: { label: 'IN THE MODEL ANSWER:', text: '"...electronics and appliances accounted for the largest share of consumption in solar-powered homes at 24%..."' },
       listLabel: 'REPLACE WITH:',
       rows: [
-        { k: 'green', term: 'constitutes', text: '"Electronics and appliances constitutes the single largest category at 24% in solar-powered homes."' },
+        { k: 'green', term: 'constitutes', text: '"Electronics and appliances constitute the single largest category at 24% in solar-powered homes."' },
         { k: 'green', term: 'represents', text: '"Water heating represents 31% of consumption in homes without solar panels."' },
         { k: 'green', term: 'makes up', text: '"Space cooling makes up over a quarter of usage in non-solar households."' },
         { k: 'green', term: 'comprises', text: '"EV charging comprises 15% of electricity use in solar-equipped homes."' }],
@@ -169,7 +169,7 @@ window.DECK = {
       top: { label: 'IN THE MODEL ANSWER:', text: '"...water heating was the dominant use, making up 31% of consumption..."   /   "...lighting was absent from this breakdown..."' },
       rows: [
         { k: 'blue', term: 'the dominant category', tag: 'ADVANCED', text: 'For the largest segment — avoids repeating "the biggest"', note: '"Water heating was the dominant category in non-solar homes, accounting for almost a third of all usage."' },
-        { k: 'blue', term: 'negligible', tag: 'ADVANCED', text: 'For very small figures (<5%) — shows precision', note: '"Lighting made up a negligible 9% of electricity use in solar-powered homes."' },
+        { k: 'blue', term: 'negligible', tag: 'ADVANCED', text: 'For very small figures (<5%) — shows precision', note: 'Under 5% = negligible. Lighting at 9% = "a small share".' },
         { k: 'blue', term: 'broadly comparable', tag: 'BAND 7+', text: 'For categories that are similar but not identical', note: '"Refrigeration was broadly comparable across both groups, at 16% and 12% respectively."' },
         { k: 'blue', term: 'heavily skewed towards', tag: 'BAND 8', text: 'For extreme imbalance in one direction', note: '"Non-solar electricity use was heavily skewed towards water heating and space cooling, which together made up 58% of the total."' },
         { k: 'blue', term: 'dwarfed by', tag: 'BAND 8', text: 'When one figure is far larger than another', note: '"The lighting share in solar homes (9%) was dwarfed by the water-heating figure in non-solar homes (31%)."' },

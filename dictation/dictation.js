@@ -61,7 +61,7 @@
     var extra = sw.map(function (w, k) { return r.mb[k] ? '' : '<span class="w-extra">' + esc(w) + '</span>'; }).filter(Boolean).join(' ');
     var cls = pct === 100 ? 'good' : pct >= 75 ? 'mid' : 'low';
     var msg = pct === 100 ? 'Без помилок' : pct >= 75 ? 'Майже' : 'Послухай ще раз';
-    $('res').innerHTML = '<span class="score ' + cls + '">' + msg + ' · ' + ok + ' з ' + mw.length + ' слів</span><div class="lbl">МОДЕЛЬ (золотим: ' + APX + ')</div><div class="line">' + html + '</div>' + (extra ? '<div class="lbl">ЗАЙВЕ / НЕ ТАК У ТВОЇЙ ВІДПОВІДІ</div><div class="line">' + extra + '</div>' : '');
+    $('res').innerHTML = '<span class="score ' + cls + '">' + msg + ' · ' + ok + ' з ' + mw.length + ' слів</span><div class="lbl">МОДЕЛЬ (золотим: ' + APX + ')</div><div class="line">' + html + '</div>' + (S[i].uk ? '<div class="lbl">ПОЯСНЕННЯ</div><div class="line uk">' + esc(S[i].uk) + '</div>' : '') + (extra ? '<div class="lbl">ЗАЙВЕ / НЕ ТАК У ТВОЇЙ ВІДПОВІДІ</div><div class="line">' + extra + '</div>' : '');
     $('res').hidden = false; results[i] = { ok: ok, total: mw.length, ap: modelWords.filter(function (x) { return x.ap; }).length, apOk: modelWords.filter(function (x, k) { return x.ap && r.ma[k]; }).length };
     state = 'next'; $('check').hidden = true; $('next').hidden = false; $('next').textContent = i === S.length - 1 ? 'Підсумок · Enter →' : 'Далі · Enter →'; $('inp').disabled = true;
     // додаємо в абзац
