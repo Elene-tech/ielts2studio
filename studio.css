@@ -209,3 +209,6 @@ kbd{display:inline-block;font-family:var(--sans);font-size:12.5px;font-weight:70
 @media print{.help{display:none!important}}
 
 .speedval{min-width:18px;font-weight:700;color:var(--g)}
+
+/* посилання на теорію */
+a.tbtn{text-decoration:none;display:inline-flex;align-items:center}
