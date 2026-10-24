@@ -283,3 +283,5 @@ body.marking .hlu:hover{outline:1px dashed #333}
 .hints i{opacity:.75;font-style:normal}
 body:not(.nohints) #viewport{bottom:30px}
 body.nohints .hints{display:none}
+
+#dictLink{background:#2C7A5A;border-color:#2C7A5A}

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Диктант · Write It Right</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="dictation.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand"><b>Target English</b><span>Write It Right · IELTS Writing Task 1</span></div>
+  <div class="ttl">Диктант: Line Graph</div>
+  <div class="tools"><button class="tbtn" id="helpBtn">Як це працює</button></div>
+</header>
+
+<main>
+  <section class="left card">
+    <div class="meta"><span class="pill">Завдання</span><span class="pill soft">слухай · друкуй · перевіряй</span></div>
+    <div class="prompt"><p id="prompt"></p><p class="tail" id="promptTail"></p></div>
+    <figure class="fig"><figcaption id="chartTitle"></figcaption><div id="chart"></div></figure>
+    <p class="apxnote">≈ На графіку немає точних цифр, тому в моделі використано <b>approximately, around, roughly, just over</b>.</p>
+  </section>
+
+  <section class="right">
+    <div class="steps" id="dots"></div>
+    <div class="dcard" id="dcard">
+      <div class="dtop"><span class="chip" id="secChip"></span><span class="cnt" id="cnt"></span></div>
+      <div class="ctr">
+        <button class="play" id="play" title="Слухати (Alt+R)">▶ Слухати</button>
+        <button class="tbtn" id="slow" title="Повільніше (Alt+S)">🐢 Повільно</button>
+        <button class="tbtn" id="hint" title="Підказка: перші слова (Alt+H)">💡 Підказка</button>
+        <span class="src" id="src"></span>
+      </div>
+      <textarea id="inp" rows="3" spellcheck="false" autocomplete="off" autocapitalize="off" placeholder="Надрукуй речення, яке почув(ла)…"></textarea>
+      <div class="hintline" id="hintline" hidden></div>
+      <div class="act">
+        <button class="tbtn pri" id="check">Перевірити · Enter</button>
+        <button class="tbtn" id="next" hidden>Далі · Enter →</button>
+        <span class="kh">Shift+Enter: новий рядок. Розділові знаки не оцінюються.</span>
+      </div>
+      <div class="res" id="res" hidden></div>
+    </div>
+    <div class="sum" id="sum" hidden></div>
+    <div class="paper" id="paper"></div>
+  </section>
+</main>
+
+<div class="ov" id="help" hidden>
+  <div class="ov-box">
+    <div class="ov-top"><h2>Як це працює</h2><button class="tbtn sq" id="helpClose">✕</button></div>
+    <ol class="how">
+      <li>Подивись на графік зліва: це завдання, до якого написана модельна відповідь.</li>
+      <li>Натисни <b>▶ Слухати</b> і надрукуй речення. Можна слухати знову, повільно (🐢) або взяти підказку (💡).</li>
+      <li>Натисни <b>Enter</b>: побачиш, які слова пропущено (червоні), зайві (закреслені) і правильні (зелені). Мову наближення підсвічено золотим.</li>
+      <li>Далі наступне речення. Наприкінці отримаєш підсумок і всю відповідь разом.</li>
+    </ol>
+    <p class="tip">Клавіші: <kbd>Enter</kbd> перевірити / далі · <kbd>Alt</kbd>+<kbd>R</kbd> слухати · <kbd>Alt</kbd>+<kbd>S</kbd> повільно · <kbd>Alt</kbd>+<kbd>H</kbd> підказка.</p>
+  </div>
+</div>
+
+<script src="chart.js"></script>
+<script src="data/line-1.js"></script>
+<script src="dictation.js"></script>
+</body>
+</html>
