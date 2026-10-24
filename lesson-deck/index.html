@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Презентація · Line Graphs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="deck.css">
+</head>
+<body>
+<header class="top" id="top">
+  <div class="brand"><b>Target English</b><span id="brandSub">Write It Right</span></div>
+  <div class="navc">
+    <button class="tbtn sq" id="prev" title="Назад (←)">←</button>
+    <span class="count" id="count">1 / 1</span>
+    <button class="tbtn pri" id="next" title="Далі (Пробіл)">Далі · Пробіл</button>
+  </div>
+  <div class="tools">
+    <button class="tbtn" id="tocBtn" title="Зміст слайдів (G)">Слайди</button>
+    <button class="tbtn" id="faceBtn" title="Місце для камери (V)">Камера: справа</button>
+    <button class="tbtn" id="clean" title="Чистий екран (C)">Чистий екран</button>
+    <button class="tbtn" id="full" title="Повний екран (F)">Повний екран</button>
+    <a class="tbtn lnk" id="nextLink" href="#" hidden>Пишемо разом →</a>
+    <button class="tbtn sq" id="helpBtn" title="Довідник (H)">?</button>
+  </div>
+  <div class="bar"><i id="bar"></i></div>
+</header>
+
+<div id="viewport">
+  <div id="stage" data-face="right">
+    <div id="slideWrap"></div>
+    <aside id="face"><span>← камера</span></aside>
+    <footer class="foot"><span id="credit"></span><span id="where"></span></footer>
+  </div>
+</div>
+
+<div class="ov" id="toc" hidden>
+  <div class="ov-box">
+    <div class="ov-top"><h2>Слайди</h2><button class="tbtn sq" id="tocClose">✕</button></div>
+    <div id="tocList"></div>
+  </div>
+</div>
+
+<div class="ov" id="help" hidden>
+  <div class="ov-box narrow">
+    <div class="ov-top"><h2>Довідник по кнопках</h2><button class="tbtn sq" id="helpClose">✕</button></div>
+    <dl class="keys">
+      <dt><kbd>Пробіл</kbd> <kbd>→</kbd> <kbd>Enter</kbd></dt><dd><b>Далі.</b> Відкриває наступний блок на слайді, а коли блоки скінчились, наступний слайд.</dd>
+      <dt><kbd>←</kbd> <kbd>Backspace</kbd></dt><dd><b>Назад.</b> Ховає останній блок, а потім повертає до попереднього слайда.</dd>
+      <dt><kbd>Home</kbd> <kbd>End</kbd></dt><dd>Перший і останній слайд.</dd>
+      <dt><kbd>G</kbd></dt><dd><b>Слайди.</b> Зміст зі стрибком на будь-який слайд.</dd>
+      <dt><kbd>V</kbd></dt><dd><b>Камера.</b> Справа (колонка), куточок (коло) або без неї. Змінює ширину слайда.</dd>
+      <dt><kbd>C</kbd></dt><dd><b>Чистий екран.</b> Ховає кнопки, лишається тільки слайд. Ще раз <kbd>C</kbd> повертає.</dd>
+      <dt><kbd>F</kbd></dt><dd><b>Повний екран.</b> Esc виходить.</dd>
+      <dt><kbd>H</kbd> <kbd>?</kbd></dt><dd>Цей довідник. Закрити: <kbd>Esc</kbd>.</dd>
+      <dt>Пишемо разом →</dt><dd>Кнопка вгорі веде у Writing Studio з новим графіком (відео 2).</dd>
+    </dl>
+    <p class="tip">Порядок запису: <kbd>F</kbd> повний екран, <kbd>V</kbd> оберіть камеру, <kbd>C</kbd> чистий екран, і далі тільки Пробіл.</p>
+  </div>
+</div>
+
+<script src="chart.js"></script>
+<script src="data/line-graph.js"></script>
+<script src="deck.js"></script>
+</body>
+</html>
