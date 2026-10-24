@@ -18,9 +18,11 @@
     <button class="tbtn pri" id="next" title="Далі (Пробіл)">Далі · Пробіл</button>
   </div>
   <div class="tools">
-    <button class="tbtn" id="tocBtn" title="Зміст слайдів (G)">Слайди</button>
-    <button class="tbtn" id="clean" title="Чистий екран (C)">Чистий екран</button>
-    <button class="tbtn" id="full" title="Повний екран (F)">Повний екран</button>
+    <button class="tbtn" id="tocBtn" title="Зміст слайдів (G)">Слайди <kbd class="kb">G</kbd></button>
+    <button class="tbtn" id="fullBtn" title="Повна відповідь (A)">Повна відповідь <kbd class="kb">A</kbd></button>
+    <button class="tbtn" id="mkBtn" title="Маркер: виділяти текст кольором (M)">Маркер <kbd class="kb">M</kbd></button>
+    <button class="tbtn" id="clean" title="Чистий екран (C)">Чистий екран <kbd class="kb">C</kbd></button>
+    <button class="tbtn" id="full" title="Повний екран (F)">Повний екран <kbd class="kb">F</kbd></button>
     <a class="tbtn lnk" id="nextLink" href="#" hidden>Пишемо разом →</a>
     <button class="tbtn sq" id="helpBtn" title="Довідник (H)">?</button>
   </div>
@@ -32,6 +34,28 @@
     <div id="slideWrap"></div>
     <footer class="foot"><span id="credit"></span><span id="where"></span></footer>
   </div>
+</div>
+
+<div class="hints" id="hints">
+  <span><kbd>Пробіл</kbd> далі</span><span><kbd>←</kbd> назад</span><span><kbd>A</kbd> повна відповідь</span><span><kbd>M</kbd> маркер <i>(1–4 колір, 0 гумка, X стерти)</i></span><span><kbd>G</kbd> слайди</span><span><kbd>C</kbd> чистий екран</span><span><kbd>F</kbd> повний екран</span><span><kbd>K</kbd> сховати цей рядок</span><span><kbd>H</kbd> довідник</span>
+</div>
+
+<div class="ov" id="fullOv" hidden>
+  <div class="ov-box wide">
+    <div class="ov-top"><h2>Повна відповідь · Band 7</h2><button class="tbtn sq" id="fullClose" title="Закрити (Esc)">✕</button></div>
+    <div id="fullBody" class="fullbox"></div>
+  </div>
+</div>
+
+<div class="mk" id="mk" hidden>
+  <span class="mkl">Маркер</span>
+  <button class="mkc c1" data-c="1" title="Жовтий (1)"></button>
+  <button class="mkc c2" data-c="2" title="Зелений (2)"></button>
+  <button class="mkc c3" data-c="3" title="Рожевий (3)"></button>
+  <button class="mkc c4" data-c="4" title="Синій (4)"></button>
+  <button class="mkc er" data-c="0" title="Гумка: клік по виділенню (0)">⌫</button>
+  <button class="mkt" id="mkClear" title="Стерти все виділення на слайді (X)">Стерти все</button>
+  <button class="mkt" id="mkOff" title="Вимкнути маркер (M)">Готово</button>
 </div>
 
 <div class="ov" id="toc" hidden>
@@ -48,6 +72,9 @@
       <dt><kbd>Пробіл</kbd> <kbd>→</kbd> <kbd>Enter</kbd></dt><dd><b>Далі.</b> Відкриває наступний блок на слайді, а коли блоки скінчились, наступний слайд.</dd>
       <dt><kbd>←</kbd> <kbd>Backspace</kbd></dt><dd><b>Назад.</b> Ховає останній блок, а потім повертає до попереднього слайда.</dd>
       <dt><kbd>Home</kbd> <kbd>End</kbd></dt><dd>Перший і останній слайд.</dd>
+      <dt><kbd>A</kbd></dt><dd><b>Повна відповідь.</b> Усі чотири абзаци в одному вікні. Закрити: <kbd>A</kbd> або <kbd>Esc</kbd>.</dd>
+      <dt><kbd>M</kbd></dt><dd><b>Маркер.</b> Увімкни, обери колір (<kbd>1</kbd>–<kbd>4</kbd>), виділи мишкою слова на слайді: вони підсвітяться. <kbd>0</kbd> гумка (клік по виділенню), <kbd>X</kbd> стерти все на слайді. Працює й у вікні повної відповіді.</dd>
+      <dt><kbd>K</kbd></dt><dd><b>Рядок підказок</b> під слайдом: показати або сховати. Його видно тільки тобі, якщо при записі обрізати нижні 30 px або сховати клавішею K.</dd>
       <dt><kbd>G</kbd></dt><dd><b>Слайди.</b> Зміст зі стрибком на будь-який слайд.</dd>
       <dt><kbd>C</kbd></dt><dd><b>Чистий екран.</b> Ховає кнопки, лишається тільки слайд. Ще раз <kbd>C</kbd> повертає.</dd>
       <dt><kbd>F</kbd></dt><dd><b>Повний екран.</b> Esc виходить.</dd>

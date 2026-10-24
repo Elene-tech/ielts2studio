@@ -243,3 +243,43 @@ mark.kw{background:none;color:var(--or);font-weight:700;border-bottom:2px solid 
 .keys dd{margin:0;font-size:14.5px}
 .tip{margin:14px 0 0;background:#FFF0CC;border-radius:10px;padding:10px 14px;font-size:14.5px;color:#7a5a12}
 @media (max-width:900px){.tools .tbtn:not(.sq):not(.lnk){display:none}}
+
+/* наближення */
+mark.ap{background:rgba(201,168,76,.38);color:inherit;border-bottom:2px dashed #9A7020;border-radius:4px;padding:0 3px;font-weight:600}
+.chart-card .apx{font-size:12.5px;color:#9A7020;background:#FFF0CC;border-radius:8px;padding:3px 10px;margin:2px 0 0;font-weight:600}
+.lc .val{}
+/* повна відповідь */
+.fullbox{display:flex;flex-direction:column;gap:12px}
+.fp{background:var(--b);border:2px solid var(--c);border-radius:14px;padding:12px 18px}
+.fp .mh{font-size:12.5px;font-weight:700;letter-spacing:.1em;color:var(--c);margin-bottom:5px}
+.fp p{margin:0;font-size:19px;line-height:1.55;color:#1A2E25}
+.t-full .fp p{font-size:17.5px;line-height:1.5}
+.ov-box.wide{max-width:1100px}
+.ov-box.wide .fp p{font-size:20px}
+/* маркер */
+.mk{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:30;display:flex;align-items:center;gap:8px;background:#1A3A2D;color:#fff;border-radius:999px;padding:8px 14px;box-shadow:0 6px 24px rgba(0,0,0,.35)}
+.mk[hidden]{display:none}
+.mk .mkl{font-size:13px;opacity:.8;margin-right:2px}
+.mkc{width:30px;height:30px;border-radius:50%;border:3px solid transparent;cursor:pointer;color:#1A3A2D;font-size:15px;font-weight:700}
+.mkc.c1{background:#FFD60A}.mkc.c2{background:#4AC878}.mkc.c3{background:#FF7A8A}.mkc.c4{background:#5AB0FF}.mkc.er{background:#fff}
+.mkc.sel{border-color:#fff;box-shadow:0 0 0 2px #C9A84C}
+.mkt{background:rgba(255,255,255,.14);color:#fff;border:1px solid rgba(255,255,255,.3);border-radius:999px;padding:6px 12px;font-size:13px;cursor:pointer}
+.mkt:hover{background:rgba(255,255,255,.28)}
+.tbtn.act{background:var(--gold);color:var(--g)}
+body.marking #slideWrap,body.marking #fullBody{cursor:text}
+.hlu{border-radius:4px;padding:1px 0;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.hlu.c1{background:rgba(255,214,10,.6)}.hlu.c2{background:rgba(74,200,120,.5)}.hlu.c3{background:rgba(255,122,138,.45)}.hlu.c4{background:rgba(90,176,255,.45)}
+body.marking .hlu:hover{outline:1px dashed #333}
+
+.kb{margin-left:7px;font-family:inherit;font-size:11px;font-weight:700;background:rgba(255,255,255,.2);border-radius:5px;padding:1px 6px;line-height:1.5}
+.tbtn.pri .kb{background:rgba(26,58,45,.18)}
+.tbtn{white-space:nowrap}
+.brand span{white-space:nowrap}
+@media (max-width:1560px){.top .tbtn{padding:7px 9px;font-size:12.5px}.kb{margin-left:5px;padding:1px 5px}.brand span{display:none}.top .tools{gap:6px}}
+
+/* рядок підказок під слайдом (для тебе: обріж його при записі або сховай клавішею K) */
+.hints{position:fixed;left:0;right:0;bottom:0;height:30px;background:#0b1d15;color:#9fb8ab;display:flex;align-items:center;justify-content:center;gap:18px;font-size:12.5px;white-space:nowrap;z-index:15;overflow:hidden}
+.hints kbd{font-family:inherit;font-weight:700;color:#fff;background:rgba(255,255,255,.16);border-radius:5px;padding:1px 6px;margin-right:5px}
+.hints i{opacity:.75;font-style:normal}
+body:not(.nohints) #viewport{bottom:30px}
+body.nohints .hints{display:none}

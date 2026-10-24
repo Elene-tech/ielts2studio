@@ -10,6 +10,7 @@ window.DECK = {
   chart: {
     title: 'Monthly Revenue of Jewellery & Co.',
     yTitle: 'Thousands of euros', xTitle: 'Month', yMax: 90, yStep: 10,
+    fmt: function (d) { return '≈' + d; },
     xLabels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
     series: [
       { id: 's1', name: 'Shop 1', color: '#3a5fcd', marker: 'circle',   data: [17, 16, 24, 28, 38, 40, 40, 38, 42, 46, 50, 50] },
@@ -50,6 +51,12 @@ window.DECK = {
         { n: '02', q: 'What does the y-axis show?', uk: 'Що вимірюється і в яких одиницях?', hl: { axes: 'y' } },
         { n: '03', q: 'What is the time period?', uk: 'Який часовий проміжок охоплює графік?', hl: { axes: 'x' } },
         { n: '04', q: 'What are the TWO biggest trends?', uk: 'Найбільше зростання? Найбільше падіння?', hl: { s: ['s3', 's1'], pts: { s3: [0, 3, 11], s1: [0, 11] } } }] },
+
+    { type: 'cols', bullets: true, section: 'The Task', title: 'Approximate Data = Approximate Language', sub: 'На графіку немає таблиці: значення зчитуємо за сіткою, тому пишемо наближено',
+      cols: [
+        { k: 'blue',  head: '≈  APPROXIMATELY', items: ['approximately 72,000 euros', 'around 42,000 euros', 'roughly 79,000 euros', 'about / some 60,000 euros'] },
+        { k: 'green', head: 'JUST OVER / JUST UNDER', items: ['just over 40,000 euros', 'just under 80,000 euros', 'nearly / almost 50,000 euros', 'well above 60,000 euros'] },
+        { k: 'gold',  head: 'ЧОМУ ЦЕ ВАЖЛИВО', items: ['Графік — не таблиця: цифри читаємо оком, а не копіюємо', 'Точна цифра, якої не видно на сітці, може виявитись помилкою', 'Approximation language показує examiner\'у, що ти розумієш дані'] }] },
 
     { type: 'section', num: '3', title: 'The 4-Paragraph Structure', sub: 'The foundation of every Band 7+ answer', section: '4-Paragraph Structure' },
 
@@ -115,10 +122,10 @@ window.DECK = {
 
     { type: 'model', section: 'Model Answer', title: '§3 — Body 1', sub: 'Тут — конкретні дані, цифри, порівняння', k: 'gold', label: '§3  BODY 1  —  Shop 3 & Shop 1',
       segs: [
-        { t: 'Shop 3 began the year as the top performer, opening at approximately 72,000 euros in January', hl: { s: ['s3'], pts: { s3: [0] } } },
-        { t: 'before falling sharply to around 42,000 euros by April.', hl: { s: ['s3'], pts: { s3: [0, 3] } } },
-        { t: 'It subsequently surged dramatically, climbing back to peak at roughly 79,000 euros in December.', hl: { s: ['s3'], pts: { s3: [3, 11] } } },
-        { t: 'Shop 1, by contrast, showed a steady upward trend throughout, rising from just 17,000 euros to approximately 50,000 euros by year end.', hl: { s: ['s1'], pts: { s1: [0, 11] } } }] },
+        { t: 'Shop 3 began the year as the top performer, opening at [[approximately 72,000]] euros in January', hl: { s: ['s3'], pts: { s3: [0] } }, chips: [['approximately / around / roughly', '= значення зчитані з графіка наближено, не точні']] },
+        { t: 'before falling sharply to [[around 42,000]] euros by April.', hl: { s: ['s3'], pts: { s3: [0, 3] } } },
+        { t: 'It subsequently surged dramatically, climbing back to peak at [[roughly 79,000]] euros in December.', hl: { s: ['s3'], pts: { s3: [3, 11] } } },
+        { t: 'Shop 1, by contrast, showed a steady upward trend throughout, rising from just 17,000 euros to [[approximately 50,000]] euros by year end.', hl: { s: ['s1'], pts: { s1: [0, 11] } } }] },
 
     { type: 'model', section: 'Model Answer', title: '§4 — Body 2', sub: 'Тут — конкретні дані, цифри, порівняння', k: 'red', label: '§4  BODY 2  —  Shop 2 & Shop 4',
       segs: [
@@ -126,7 +133,9 @@ window.DECK = {
         { t: 'with only minor fluctuations along the way.', hl: { s: ['s2'], pts: { s2: [0, 11] } } },
         { t: 'Shop 4, however, demonstrated a markedly different pattern:', hl: { s: ['s4'] } },
         { t: 'after declining from 30,000 to 20,000 euros mid-year,', hl: { s: ['s4'], pts: { s4: [0, 6] } } },
-        { t: 'it recovered only marginally, finishing at around 32,000 euros — the lowest of all four outlets.', hl: { pts: { s1: [11], s2: [11], s3: [11], s4: [11] } } }] },
+        { t: 'it recovered only marginally, finishing at [[around 32,000]] euros — the lowest of all four outlets.', hl: { pts: { s1: [11], s2: [11], s3: [11], s4: [11] } }, chips: [['around 32,000', '= на графіку немає точної цифри, тільки сітка']] }] },
+
+    { type: 'full', section: 'Model Answer', title: 'The Full Model Answer', sub: 'Усі чотири абзаци разом: виділяй маркером (M), що хочеш пояснити' },
 
     { type: 'section', num: '6', title: 'Upgrade Challenge', sub: 'Band 5 → Band 7: rewrite these sentences', section: 'Upgrade Challenge' },
 

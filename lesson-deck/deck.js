@@ -5,7 +5,7 @@
   var D = window.DECK;
   function $(id) { return document.getElementById(id); }
   function h(tag, cls, html) { var e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; }
-  function kw(t) { return String(t).replace(/\{\{(.+?)\}\}/g, '<mark class="kw">$1</mark>'); }
+  function kw(t) { return String(t).replace(/\{\{(.+?)\}\}/g, '<mark class="kw">$1</mark>').replace(/\[\[(.+?)\]\]/g, '<mark class="ap">$1</mark>'); }
   function store(k, v) { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) {} return null; }
   var COL = {
     blue:  ['#2C6E8A', '#D6E8F5'], green: ['#2C7A5A', '#D6EDE4'], gold: ['#9A7020', '#FFF0CC'], red: ['#E1512E', '#FDDDD8'],
@@ -21,7 +21,7 @@
   function head(root, d) { root.appendChild(h('h2', 's-title', d.title)); if (d.sub) root.appendChild(h('p', 's-sub', d.sub)); else root.appendChild(h('div', null)).style.height = '14px'; }
   function chartCard(ctx, d, o) {
     o = o || {};
-    var c = h('div', 'chart-card'); c.appendChild(h('div', 'ct', D.chart.title));
+    var c = h('div', 'chart-card'); c.appendChild(h('div', 'ct', D.chart.title)); if (D.chart.fmt) c.appendChild(h('div', 'apx', '≈ значення зчитані наближено: на іспиті точних цифр немає'));
     ctx.chart = window.LineChart(c, D.chart, { h: o.h || 410 });
     return c;
   }
@@ -129,6 +129,18 @@
     d.items.forEach(function (x) { var e = h('div', 'ck', '<div class="k">' + x[0] + '</div><div><b>' + x[1] + '</b><span>' + x[2] + '</span></div>'); g.appendChild(e); fr(ctx, e); });
     return r;
   };
+  function fullParas() {
+    return D.slides.filter(function (d) { return d.type === 'model'; }).map(function (d) {
+      return { k: d.k, label: d.label, html: d.segs.map(function (g) { return kw(g.t); }).join(' ') };
+    });
+  }
+  function buildFull(box, ctx) {
+    fullParas().forEach(function (x) {
+      var e = h('div', 'fp'); setCol(e, x.k); e.appendChild(h('div', 'mh', x.label)); e.appendChild(h('p', null, x.html)); box.appendChild(e);
+      if (ctx) fr(ctx, e);
+    });
+  }
+  R.full = function (d, ctx) { var r = h('div'); head(r, d); var b = h('div', 'fullbox'); r.appendChild(b); buildFull(b, ctx); return r; };
   R.end = function (d, ctx) {
     var r = h('div'); r.appendChild(h('h2', null, d.title)); r.appendChild(h('p', null, d.text));
     var e = h('div', 'dl', d.dl); r.appendChild(e); fr(ctx, e); return r;
@@ -196,9 +208,9 @@
 
   document.addEventListener('keydown', function (e) {
     if (e.ctrlKey || e.metaKey || e.altKey) return;
-    var k = e.key, ovOpen = !$('toc').hidden || !$('help').hidden;
-    if (k === 'Escape') { $('toc').hidden = true; $('help').hidden = true; return; }
-    if (ovOpen) { if (k === ' ') e.preventDefault(); if (k === 'h' || k === 'H' || k === 'р' || k === 'Р') $('help').hidden = true; if (k === 'g' || k === 'G' || k === 'п' || k === 'П') $('toc').hidden = true; return; }
+    var k = e.key, ovOpen = !$('toc').hidden || !$('help').hidden || !$('fullOv').hidden;
+    if (k === 'Escape') { $('toc').hidden = true; $('help').hidden = true; $('fullOv').hidden = true; return; }
+    if (ovOpen) { if (k === ' ') e.preventDefault(); if (!$('fullOv').hidden && (k === 'a' || k === 'A' || k === 'ф' || k === 'Ф')) $('fullOv').hidden = true; if (!$('fullOv').hidden && (k === 'm' || k === 'M' || k === 'ь' || k === 'Ь')) setMarker(!mk.on); if (!$('fullOv').hidden && /^[0-4]$/.test(k) && mk.on) setMc(+k); if (k === 'h' || k === 'H' || k === 'р' || k === 'Р') $('help').hidden = true; if (k === 'g' || k === 'G' || k === 'п' || k === 'П') $('toc').hidden = true; return; }
     if (k === ' ' || k === 'ArrowRight' || k === 'Enter' || k === 'PageDown') { e.preventDefault(); next(); }
     else if (k === 'ArrowLeft' || k === 'Backspace' || k === 'PageUp') { e.preventDefault(); prev(); }
     else if (k === 'Home') go(0, false); else if (k === 'End') go(S.length - 1, true);
@@ -206,9 +218,61 @@
     else if (k === 'c' || k === 'C' || k === 'с' || k === 'С') toggleClean();
     else if (k === 'f' || k === 'F' || k === 'а' || k === 'А') toggleFull();
     else if (k === 'h' || k === 'H' || k === '?' || k === 'р' || k === 'Р') toggleOv('help', true);
+    else if (k === 'k' || k === 'K' || k === 'л' || k === 'Л') { document.body.classList.toggle('nohints'); store('dk-hints', document.body.classList.contains('nohints') ? '0' : '1'); fit(); }
+    else if (k === 'a' || k === 'A' || k === 'ф' || k === 'Ф') toggleFullAns(true);
+    else if (k === 'm' || k === 'M' || k === 'ь' || k === 'Ь') setMarker(!mk.on);
+    else if (mk.on && /^[0-4]$/.test(k)) setMc(+k);
+    else if (mk.on && (k === 'x' || k === 'X' || k === 'ч' || k === 'Ч')) clearMarks();
   });
   document.addEventListener('keyup', function (e) { if (e.key === ' ') e.preventDefault(); });
+  /* ---------- повна відповідь ---------- */
+  var fullBuilt = false;
+  function toggleFullAns(on) {
+    if (!fullBuilt) { buildFull($('fullBody')); fullBuilt = true; }
+    toggleOv('fullOv', on);
+  }
+  $('fullBtn').onclick = function () { toggleFullAns(true); }; $('fullClose').onclick = function () { toggleOv('fullOv', false); };
+  $('fullOv').addEventListener('click', function (e) { if (e.target === this) this.hidden = true; });
+
+  /* ---------- маркер: виділення тексту кольором ---------- */
+  var mk = { on: false, c: 1 };
+  var mkBar = $('mk');
+  function setMarker(on) {
+    mk.on = on; mkBar.hidden = !on; $('mkBtn').classList.toggle('act', on); document.body.classList.toggle('marking', on);
+  }
+  function setMc(c) { mk.c = c; document.querySelectorAll('.mkc').forEach(function (b) { b.classList.toggle('sel', +b.dataset.c === c); }); }
+  document.querySelectorAll('.mkc').forEach(function (b) { b.addEventListener('mousedown', function (e) { e.preventDefault(); }); b.onclick = function () { setMc(+b.dataset.c); }; });
+  function wrapRange(range, c) {
+    var root = range.commonAncestorContainer; if (root.nodeType === 3) root = root.parentNode;
+    var w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null), nodes = [], n;
+    if (range.commonAncestorContainer.nodeType === 3) nodes.push(range.commonAncestorContainer);
+    else while ((n = w.nextNode())) { if (range.intersectsNode(n) && n.nodeValue.trim()) nodes.push(n); }
+    nodes.forEach(function (t) {
+      var s = t === range.startContainer ? range.startOffset : 0, e = t === range.endContainer ? range.endOffset : t.nodeValue.length;
+      if (e <= s) return;
+      var mid = t; if (s > 0) mid = t.splitText(s); if (e - s < mid.nodeValue.length) mid.splitText(e - s);
+      if (!mid.nodeValue.trim()) return;
+      var sp = document.createElement('span'); sp.className = 'hlu c' + c; mid.parentNode.insertBefore(sp, mid); sp.appendChild(mid);
+    });
+  }
+  function unwrap(sp) { var p = sp.parentNode; while (sp.firstChild) p.insertBefore(sp.firstChild, sp); p.removeChild(sp); p.normalize(); }
+  function clearMarks() {
+    var scope = !$('fullOv').hidden ? $('fullBody') : S[si].root;
+    scope.querySelectorAll('.hlu').forEach(unwrap);
+  }
+  document.addEventListener('mouseup', function (e) {
+    if (!mk.on || e.target.closest('#mk')) return;
+    if (mk.c === 0) { var hs2 = e.target.closest('.hlu'); if (hs2) unwrap(hs2); return; }
+    var sel = window.getSelection(); if (!sel || sel.isCollapsed || !sel.rangeCount) return;
+    var r = sel.getRangeAt(0), a = r.commonAncestorContainer; a = a.nodeType === 3 ? a.parentNode : a;
+    if (!a.closest || !(a.closest('#slideWrap') || a.closest('#fullBody'))) return;
+    wrapRange(r, mk.c); sel.removeAllRanges();
+  });
+  $('mkBtn').onclick = function () { setMarker(!mk.on); }; $('mkClear').onclick = clearMarks; $('mkOff').onclick = function () { setMarker(false); };
+  setMc(1);
+
   var hs = parseInt((location.hash || '').slice(1), 10); if (hs) si = Math.max(0, Math.min(S.length - 1, hs - 1));
+  if (store('dk-hints') === '0') document.body.classList.add('nohints');
   fit(); show();
   window.__deck = { next: next, prev: prev, go: go, count: function () { return S.length; }, state: function () { return { si: si, f: f, frags: S[si].frags.length }; }, slides: S };
 })();
