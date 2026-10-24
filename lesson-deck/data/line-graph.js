@@ -150,6 +150,7 @@ window.DECK = {
     { type: 'check', section: 'Upgrade Challenge', title: 'Self-Check Before You Submit', sub: 'Перевір свою відповідь за цим чеклистом перед тим як здавати',
       items: [['§1', 'Introduction — ', 'Did I paraphrase — not copy — the task?'], ['§2', 'Overview — ', 'Do I have 2 main trends WITHOUT specific numbers?'], ['§3', 'Body 1 — ', 'Did I use adverbs AND specific data?'], ['§4', 'Body 2 — ', 'Did I compare groups or contrast trends?'], ['V', 'Vocabulary — ', 'Did I avoid repeating «went up / went down» more than once?'], ['G', 'Grammar — ', 'Did I use both Pattern A (verb+adverb) AND Pattern B (noun phrase)?'], ['W', 'Word count — ', 'Is my response at least 150 words?']] },
 
-    { type: 'end', title: 'Module 1 complete.', text: 'Now listen to the audio dictation, write the model answer, and check yourself.', dl: 'Download your PDF phrase sheet →  Task1_Module1_LineGraph_Phrases.pdf' }
+    { type: 'end', title: 'Module 1 complete.', text: 'Now listen to the audio dictation, write the model answer, and check yourself.', dl: 'Download your PDF phrase sheet →  Task1_Module1_LineGraph_Phrases.pdf',
+      links: [{ label: 'Диктант: слухай і друкуй →', url: '../dictation/index.html' }, { label: 'Пишемо разом: відповідь на екзаменному графіку →', url: '../index.html?t=line-1' }] }
   ]
 };

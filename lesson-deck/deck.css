@@ -285,3 +285,73 @@ body:not(.nohints) #viewport{bottom:30px}
 body.nohints .hints{display:none}
 
 #dictLink{background:#2C7A5A;border-color:#2C7A5A}
+
+.endlinks{display:flex;gap:14px;margin-top:22px;flex-wrap:wrap}
+.endlink{background:var(--gold);color:var(--g);font-weight:700;text-decoration:none;border-radius:12px;padding:12px 20px;font-size:17px}
+.endlink:hover{filter:brightness(1.08)}
+
+/* ---- КРУГОВІ ДІАГРАМИ ---- */
+.lc.pie text{font-family:var(--sans)}
+.lc .ptitle{font-family:var(--serif);font-size:22px;font-weight:700;fill:var(--g);transition:fill .3s}
+.lc .ptitle.on{fill:var(--or)}
+.lc .pv{font-size:17px;font-weight:700;paint-order:stroke;stroke:rgba(0,0,0,.18);stroke-width:2px;stroke-linejoin:round}
+.lc .pc{transition:opacity .4s}.lc .pc.dim{opacity:.16}
+.lc .sl{transition:opacity .4s,transform .3s}.lc .sl.dim{opacity:.2}
+.lc-leg .sw{width:14px;height:14px;border-radius:4px;display:inline-block}
+
+/* ---- НОВІ ТИПИ СЛАЙДІВ ---- */
+.t-dual .cols{flex:1;min-height:0;margin:12px 0}
+.t-dual .cols.txt .col div{align-items:flex-start;justify-content:flex-start;padding:16px 18px;gap:12px}
+.t-dual .cols.txt .pl{font-size:17.5px;font-weight:500;color:var(--txt);line-height:1.4}
+.t-dual .note{margin-top:2px}
+.vtop{background:#fff;border:1.5px solid #e3ddcf;border-left:5px solid var(--gold);border-radius:12px;padding:10px 18px;margin-bottom:12px}
+.vtop small{display:block;font-size:12.5px;font-weight:700;letter-spacing:1.5px;color:var(--amber);margin-bottom:2px}
+.vtop p{margin:0;font-size:18px;font-style:italic;color:var(--txt);line-height:1.4}
+.vtop.warn{background:var(--amberb);border-left-color:var(--amber)}
+.vlabel{font-size:12.5px;font-weight:700;letter-spacing:1.5px;color:var(--muted);margin:2px 0 8px}
+.vrows{display:flex;flex-direction:column;gap:9px;flex:1;min-height:0}
+.vrows.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-content:start}
+.vr{background:var(--b);border:1.5px solid var(--c);border-radius:11px;padding:9px 16px;display:grid;grid-template-columns:200px 1fr;gap:4px 16px;align-items:center}
+.vr b{font-family:var(--serif);font-size:19px;color:var(--c)}
+.vr i{font-size:16.5px;color:var(--txt);line-height:1.35}
+.vr .vt{grid-column:2;grid-row:1;font-size:11.5px;font-weight:700;letter-spacing:1.4px;color:var(--c);font-style:normal}
+.vr.n3{grid-template-columns:140px 1fr 270px}
+.vr.n3 small{font-size:14px;color:var(--txt2);line-height:1.3}
+.vrows.g2 .vr{grid-template-columns:1fr;gap:2px}
+.vrows.g2 .vr b{font-size:18px}
+.vtip{background:var(--greenb);border-left:5px solid var(--green);border-radius:10px;padding:10px 16px;margin-top:10px;font-size:15.5px;color:var(--txt)}
+.vtip b{display:block;font-size:12px;letter-spacing:1.5px;color:var(--green);margin-bottom:2px}
+.scale{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:12px}
+.sc{border-radius:12px;overflow:hidden;border:2px solid var(--c)}
+.sc h4{margin:0;background:var(--c);color:#fff;text-align:center;font-size:14px;letter-spacing:1px;padding:7px}
+.sc p{margin:0;background:var(--b);padding:12px 12px;font-family:var(--serif);font-style:italic;font-weight:700;color:var(--c);font-size:18px}
+.frac{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:10px}
+.fc{background:#fff;border:1.5px solid #e3ddcf;border-radius:10px;padding:10px 14px;display:flex;justify-content:space-between;align-items:center;font-size:17px;font-style:italic;color:var(--amber);font-weight:600}
+.fc span{font-style:normal;color:var(--muted);font-size:14.5px}
+.t-end2{justify-content:center}
+.kv{display:grid;grid-template-columns:1fr 340px;gap:20px}
+.kvl{display:flex;flex-direction:column;gap:9px}
+.kr{background:#fff;border:1.5px solid #e3ddcf;border-left:5px solid var(--gold);border-radius:10px;padding:9px 16px;display:grid;grid-template-columns:170px 1fr;font-size:16.5px}
+.kr b{color:var(--amber)}
+.kn{background:var(--green);border-radius:14px;padding:14px 16px;color:#fff;display:flex;flex-direction:column;gap:9px}
+.kn small{letter-spacing:1.5px;font-weight:700;color:#cfe5da}
+.kn div{background:rgba(255,255,255,.12);border-radius:9px;padding:8px 12px;font-size:15px;line-height:1.3}
+.kn div b{display:block;font-size:15.5px}
+
+/* виправлення */
+.vr.n3{grid-template-columns:170px 1fr 300px;align-items:center}
+.vr .vm{display:flex;flex-direction:column;gap:2px}
+.vr .vm .vt{position:static;font-size:11.5px;font-weight:700;letter-spacing:1.4px;color:var(--c);font-style:normal}
+.vr.n3 i{font-size:16px}
+.vr.n3 small{font-size:14.5px;color:var(--txt2);line-height:1.3}
+.t-vocab .vr.n3{padding:8px 14px}
+.t-dual .cols.txt .pl{font-size:19px;line-height:1.45}
+.two.m.pie{grid-template-columns:540px 1fr}
+.two.m.pie .mcard p{font-size:17px;line-height:1.5}
+.two.m.pie .mcard{padding:10px 16px}
+.two.m.pie .chips{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.two.m.pie .chip{padding:5px 9px;font-size:12.5px;line-height:1.25}
+.two.m.pie .chip b{font-size:13.5px}
+.two.m.pie .mcol{gap:8px}
+
+.lc .pv.out{stroke:none;paint-order:normal}

@@ -12,8 +12,8 @@
 <body>
 <header class="top">
   <div class="brand"><b>Target English</b><span>Write It Right · IELTS Writing Task 1</span></div>
-  <div class="ttl">Диктант: Line Graph</div>
-  <div class="tools"><button class="tbtn" id="helpBtn">Як це працює</button></div>
+  <div class="ttl" id="ttl">Диктант</div>
+  <div class="tools"><a class="tbtn" id="lnkTheory" href="../lesson-deck/index.html">← Теорія</a> <a class="tbtn" id="lnkStudio" href="../index.html">Пишемо разом</a> <button class="tbtn" id="helpBtn">Як це працює</button></div>
 </header>
 
 <main>
@@ -21,7 +21,7 @@
     <div class="meta"><span class="pill">Завдання</span><span class="pill soft">слухай · друкуй · перевіряй</span></div>
     <div class="prompt"><p id="prompt"></p><p class="tail" id="promptTail"></p></div>
     <figure class="fig"><figcaption id="chartTitle"></figcaption><div id="chart"></div></figure>
-    <p class="apxnote">≈ На графіку немає точних цифр, тому в моделі використано <b>approximately, around, roughly, just over</b>.</p>
+    <p class="apxnote" id="apxnote">≈ На графіку немає точних цифр, тому в моделі використано <b>approximately, around, roughly, just over</b>.</p>
   </section>
 
   <section class="right">
@@ -61,8 +61,12 @@
   </div>
 </div>
 
+<script src="../modules.js"></script>
 <script src="chart.js"></script>
-<script src="data/line-1.js"></script>
-<script src="dictation.js"></script>
+<script src="pie.js"></script>
+<script>
+(function(){var t=(new URLSearchParams(location.search).get('t')||'line-1').replace(/[^a-z0-9\-_]/gi,'');
+document.write('<script src="data/'+t+'.js"><\/script><script src="dictation.js"><\/script>');})();
+</script>
 </body>
 </html>

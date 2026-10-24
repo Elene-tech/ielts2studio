@@ -86,8 +86,10 @@
   </div>
 </div>
 
+<script src="../modules.js"></script>
 <script src="chart.js"></script>
-<script src="data/line-graph.js"></script>
+<script src="pie.js"></script>
+<script>var m=(new URLSearchParams(location.search).get("m")||"line-graph").replace(/[^a-z0-9-]/g,"");document.write('<script src="data/'+m+'.js"><\/script>');</script>
 <script src="deck.js"></script>
 </body>
 </html>

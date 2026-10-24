@@ -8,7 +8,12 @@
   function tint(el, k) { el.style.setProperty('--c', sec(k).color); el.style.setProperty('--b', sec(k).bg); }
 
   $('prompt').textContent = D.prompt; $('promptTail').textContent = D.promptTail; $('chartTitle').textContent = D.chart.title;
-  var chart = window.LineChart($('chart'), D.chart, { h: 380 });
+  var chart = D.chart.type === 'pie' ? window.PieChart($('chart'), D.chart, { h: 360 }) : window.LineChart($('chart'), D.chart, { h: 380 });
+  if (D.chart.type === 'pie') $('chart').classList.add('piehost');
+  if (D.links) { if (D.links.theory) $('lnkTheory').href = D.links.theory; if (D.links.studio) $('lnkStudio').href = D.links.studio; }
+  if (D.note) $('apxnote').innerHTML = D.note;
+  if (D.title) $('ttl').textContent = D.title.replace(' · ', ': ');
+  var APX = D.apxLabel || 'мова наближення';
   var dots = $('dots'); S.forEach(function (s, k) { var d = document.createElement('span'); d.className = 'dot'; d.textContent = k + 1; d.style.setProperty('--c', sec(s.sec).color); dots.appendChild(d); });
 
   /* ---------- звук ---------- */
@@ -23,7 +28,7 @@
   }
   function play() {
     stopAll(); $('play').classList.add('busy'); chart.setHL(S[i].hl);
-    var file = S[i].audio || ('audio/' + pad(i + 1) + '.mp3'), a = new Audio(file); curAudio = a; a.playbackRate = slow ? 0.75 : 1; a.preservesPitch = true;
+    var file = S[i].audio || ((D.audioDir || 'audio/') + pad(i + 1) + '.mp3'), a = new Audio(file); curAudio = a; a.playbackRate = slow ? 0.75 : 1; a.preservesPitch = true;
     var fell = false;
     function fb() { if (fell) return; fell = true; curAudio = null; speak(clean(S[i].text)); }
     a.addEventListener('error', fb); a.addEventListener('ended', function () { $('play').classList.remove('busy'); });
@@ -56,7 +61,7 @@
     var extra = sw.map(function (w, k) { return r.mb[k] ? '' : '<span class="w-extra">' + esc(w) + '</span>'; }).filter(Boolean).join(' ');
     var cls = pct === 100 ? 'good' : pct >= 75 ? 'mid' : 'low';
     var msg = pct === 100 ? 'Без помилок' : pct >= 75 ? 'Майже' : 'Послухай ще раз';
-    $('res').innerHTML = '<span class="score ' + cls + '">' + msg + ' · ' + ok + ' з ' + mw.length + ' слів</span><div class="lbl">МОДЕЛЬ (золотим: мова наближення)</div><div class="line">' + html + '</div>' + (extra ? '<div class="lbl">ЗАЙВЕ / НЕ ТАК У ТВОЇЙ ВІДПОВІДІ</div><div class="line">' + extra + '</div>' : '');
+    $('res').innerHTML = '<span class="score ' + cls + '">' + msg + ' · ' + ok + ' з ' + mw.length + ' слів</span><div class="lbl">МОДЕЛЬ (золотим: ' + APX + ')</div><div class="line">' + html + '</div>' + (extra ? '<div class="lbl">ЗАЙВЕ / НЕ ТАК У ТВОЇЙ ВІДПОВІДІ</div><div class="line">' + extra + '</div>' : '');
     $('res').hidden = false; results[i] = { ok: ok, total: mw.length, ap: modelWords.filter(function (x) { return x.ap; }).length, apOk: modelWords.filter(function (x, k) { return x.ap && r.ma[k]; }).length };
     state = 'next'; $('check').hidden = true; $('next').hidden = false; $('next').textContent = i === S.length - 1 ? 'Підсумок · Enter →' : 'Далі · Enter →'; $('inp').disabled = true;
     // додаємо в абзац
@@ -78,7 +83,7 @@
     var pct = Math.round(100 * ok / tot); worst.sort(function (a, b) { return b.miss - a.miss; });
     var bad = worst.filter(function (w) { return w.miss > 0; }).slice(0, 3).map(function (w) { return w.k + 1; });
     var el = $('sum'); el.hidden = false;
-    el.innerHTML = '<h3>Диктант завершено</h3><div class="big">' + pct + '%</div><p>Слів правильно: ' + ok + ' з ' + tot + '. Мова наближення: ' + apOk + ' з ' + ap + '.</p>' +
+    el.innerHTML = '<h3>Диктант завершено</h3><div class="big">' + pct + '%</div><p>Слів правильно: ' + ok + ' з ' + tot + '. ' + APX.charAt(0).toUpperCase() + APX.slice(1) + ': ' + apOk + ' з ' + ap + '.</p>' +
       (bad.length ? '<p>Найбільше помилок у реченнях: ' + bad.join(', ') + '. Перечитай їх у відповіді нижче й спробуй ще раз.</p>' : '<p>Усі речення без помилок. Це хороший знак: ти чуєш і відтворюєш Band 7 мову.</p>') +
       '<p><button class="tbtn" id="again">Пройти ще раз</button> <button class="tbtn" id="copy">Копіювати відповідь</button></p>';
     $('again').onclick = function () { location.reload(); };

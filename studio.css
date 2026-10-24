@@ -215,3 +215,20 @@ a.tbtn{text-decoration:none;display:inline-flex;align-items:center}
 
 .kb{margin-left:7px;font-family:inherit;font-size:11px;font-weight:700;background:rgba(26,58,45,.12);border-radius:5px;padding:1px 6px;line-height:1.5}
 .tbtn.pri .kb,.top .kb{background:rgba(255,255,255,.2)}
+
+/* кругові діаграми */
+#chart.piehost{flex-direction:column;justify-content:center;gap:6px}
+#chart.piehost svg{height:auto;max-height:100%}
+.lc.pie text{font-family:var(--sans)}
+.lc .ptitle{font-family:var(--serif);font-size:22px;font-weight:700;fill:var(--g);transition:fill .3s}
+.lc .ptitle.on{fill:var(--or)}
+.lc .pv{font-size:17px;font-weight:700;paint-order:stroke;stroke:rgba(0,0,0,.18);stroke-width:2px;stroke-linejoin:round}
+.lc .pc,.pie .pc{transition:opacity .4s}.pie .pc.dim{opacity:.16}
+.pie .sl{transition:opacity .4s,transform .3s}.pie .sl.dim{opacity:.2}
+.lc-legend{display:flex;flex-wrap:wrap;justify-content:center;gap:4px 18px;transition:transform .3s}
+.lc-leg{display:flex;align-items:center;gap:7px;font-size:15px;transition:opacity .3s}
+.lc-leg.dim{opacity:.3}
+.lc-leg .sw{width:14px;height:14px;border-radius:4px;display:inline-block}
+.lc-legend.pulse .lc-leg{font-weight:700;color:var(--or)}
+
+.lc .pv.out{stroke:none;paint-order:normal}

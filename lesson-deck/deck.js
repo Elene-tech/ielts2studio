@@ -5,7 +5,7 @@
   var D = window.DECK;
   function $(id) { return document.getElementById(id); }
   function h(tag, cls, html) { var e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; }
-  function kw(t) { return String(t).replace(/\{\{(.+?)\}\}/g, '<mark class="kw">$1</mark>').replace(/\[\[(.+?)\]\]/g, '<mark class="ap">$1</mark>'); }
+  function kw(t) { return String(t).replace(/\{\{(.+?)\}\}/g, '<mark class="kw">$1</mark>').replace(/\[\[(.+?)\]\]/g, '<mark class="ap">$1</mark>').replace(/\n/g, '<br>'); }
   function store(k, v) { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) {} return null; }
   var COL = {
     blue:  ['#2C6E8A', '#D6E8F5'], green: ['#2C7A5A', '#D6EDE4'], gold: ['#9A7020', '#FFF0CC'], red: ['#E1512E', '#FDDDD8'],
@@ -22,7 +22,7 @@
   function chartCard(ctx, d, o) {
     o = o || {};
     var c = h('div', 'chart-card'); c.appendChild(h('div', 'ct', D.chart.title)); if (D.chart.fmt) c.appendChild(h('div', 'apx', '≈ значення зчитані наближено: на іспиті точних цифр немає'));
-    ctx.chart = window.LineChart(c, D.chart, { h: o.h || 410 });
+    ctx.chart = (D.chart.type === 'pie' ? window.PieChart : window.LineChart)(c, D.chart, { h: o.h || (D.chart.type === 'pie' ? 340 : 410) });
     return c;
   }
 
@@ -98,7 +98,7 @@
     return r;
   };
   R.model = function (d, ctx) {
-    var r = h('div'); head(r, d); var g = h('div', 'two m'); r.appendChild(g);
+    var r = h('div'); head(r, d); var g = h('div', 'two m' + (D.chart.type === 'pie' ? ' pie' : '')); r.appendChild(g);
     var left = h('div', 'mcol'); g.appendChild(left);
     var card = h('div', 'mcard'); setCol(card, d.k); card.appendChild(h('div', 'mh', d.label)); var p = h('p'); card.appendChild(p); left.appendChild(card);
     var chipsLbl = null, chips = null;
@@ -141,9 +141,49 @@
     });
   }
   R.full = function (d, ctx) { var r = h('div'); head(r, d); var b = h('div', 'fullbox'); r.appendChild(b); buildFull(b, ctx); return r; };
+  R.dual = function (d, ctx) {
+    var r = h('div'); head(r, d);
+    if (d.top) { var g = h('div', 'stack'); row(d.top, ctx, g); r.appendChild(g); }
+    var g2 = h('div', 'cols txt'); g2.style.gridTemplateColumns = 'repeat(' + d.cols.length + ',1fr)'; r.appendChild(g2);
+    d.cols.forEach(function (c) { var e = h('div', 'col'); setCol(e, c.k); e.appendChild(h('h3', null, c.head)); var inner = h('div'); c.items.forEach(function (t) { inner.appendChild(h('span', 'pl', kw(t))); }); e.appendChild(inner); g2.appendChild(e); fr(ctx, e); });
+    if (d.note) { var n = h('div', 'note', kw(d.note)); r.appendChild(n); fr(ctx, n); }
+    return r;
+  };
+  R.vocab = function (d, ctx) {
+    var r = h('div'); head(r, d);
+    if (d.top) { var t = h('div', 'vtop ' + (d.top.cls || ''), '<small>' + d.top.label + '</small><p>' + kw(d.top.text) + '</p>'); r.appendChild(t); fr(ctx, t); }
+    var lb = null; if (d.listLabel) { lb = h('div', 'vlabel', d.listLabel); r.appendChild(lb); lb.classList.add('fr'); }
+    var g = h('div', 'vrows' + (d.grid ? ' g2' : '')); r.appendChild(g);
+    d.rows.forEach(function (x, i) {
+      var e = h('div', 'vr' + (x.note ? ' n3' : '')); setCol(e, x.k || 'green');
+      e.innerHTML = '<b>' + x.term + '</b>' + (x.note ? '<div class="vm">' + (x.tag ? '<span class="vt">' + x.tag + '</span>' : '') + '<i>' + kw(x.text) + '</i></div><small>' + x.note + '</small>' : '<i>' + kw(x.text) + '</i>');
+      g.appendChild(e); fr(ctx, i === 0 && lb ? [e, lb] : e);
+    });
+    if (d.tip) { var tp = h('div', 'vtip', '<b>' + d.tip[0] + '</b>' + d.tip[1]); r.appendChild(tp); fr(ctx, tp); }
+    return r;
+  };
+  R.scale = function (d, ctx) {
+    var r = h('div'); head(r, d); var g = h('div', 'scale'); r.appendChild(g);
+    d.scale.forEach(function (x) { var e = h('div', 'sc'); setCol(e, x.k); e.appendChild(h('h4', null, x.head)); e.appendChild(h('p', null, x.text)); g.appendChild(e); fr(ctx, e); });
+    var t = h('div', 'vtop', '<small>' + d.top.label + '</small><p>' + kw(d.top.text) + '</p>'); r.appendChild(t); fr(ctx, t);
+    var lb = h('div', 'vlabel', d.fracLabel); r.appendChild(lb); var fg = h('div', 'frac'); r.appendChild(fg);
+    d.fracs.forEach(function (x, i) { var e = h('div', 'fc', x[0] + '<span>' + x[1] + '</span>'); fg.appendChild(e); fr(ctx, i === 0 ? [e, lb] : e); });
+    lb.classList.add('fr');
+    var tp = h('div', 'vtip', '<b>' + d.tip[0] + '</b>' + d.tip[1]); r.appendChild(tp); fr(ctx, tp); return r;
+  };
+  R.end2 = function (d, ctx) {
+    var r = h('div'); r.appendChild(h('h2', 's-title', d.title)); r.appendChild(h('p', 's-sub', d.sub));
+    var g = h('div', 'kv'); r.appendChild(g); var l = h('div', 'kvl'); g.appendChild(l);
+    d.rows.forEach(function (x) { var e = h('div', 'kr', '<b>' + x[0] + '</b><span>' + x[1] + '</span>'); l.appendChild(e); fr(ctx, e); });
+    var n = h('div', 'kn'); n.appendChild(h('small', null, d.nextLabel)); d.next.forEach(function (x) { n.appendChild(h('div', null, '<b>' + x[0] + '</b>' + x[1])); }); g.appendChild(n); fr(ctx, n);
+    if (d.links) { var w = h('div', 'endlinks'); d.links.forEach(function (x) { var a = h('a', 'endlink', x.label); a.href = x.url; w.appendChild(a); }); r.appendChild(w); fr(ctx, w); }
+    return r;
+  };
   R.end = function (d, ctx) {
     var r = h('div'); r.appendChild(h('h2', null, d.title)); r.appendChild(h('p', null, d.text));
-    var e = h('div', 'dl', d.dl); r.appendChild(e); fr(ctx, e); return r;
+    var e = h('div', 'dl', d.dl); r.appendChild(e); fr(ctx, e);
+    if (d.links) { var w = h('div', 'endlinks'); d.links.forEach(function (l) { var a = h('a', 'endlink', l.label); a.href = l.url; w.appendChild(a); }); r.appendChild(w); fr(ctx, w); }
+    return r;
   };
 
   /* ---------- побудова ---------- */
@@ -156,6 +196,7 @@
   });
   $('credit').textContent = D.meta.credit; $('brandSub').textContent = D.meta.brandSub || 'Write It Right';
   document.title = D.meta.docTitle || document.title;
+  if (D.meta.dict) $('dictLink').href = D.meta.dict;
   if (D.meta.next) { var nl = $('nextLink'); nl.hidden = false; nl.href = D.meta.next.url; nl.textContent = D.meta.next.label; }
 
   function show() {

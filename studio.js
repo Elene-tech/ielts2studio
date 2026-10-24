@@ -23,13 +23,14 @@
 
     /* ---------- ЛІВА ПАНЕЛЬ ---------- */
     $('kicker').textContent = T.kicker;
+    if (T.links) { if (T.links.theory) $('theory').href = T.links.theory; if (T.links.dict) $('dictLink').href = T.links.dict; }
     $('prompt').textContent = T.prompt;
     $('promptTail').textContent = T.promptTail + ' Write at least ' + T.minWords + ' words.';
     $('chartTitle').textContent = T.chart.title;
 
     var C = T.chart;
     var W = 680, H = 436, PL = 66, PR = 660, PT = 34, PB = 368;
-    var n = C.xLabels.length;
+    var n = (C.xLabels || []).length;
     function ix(i) { return 100 + i * ((PR - 40 - 100) / (n - 1)) + 0; }
     function iy(v) { return PB - (v / C.yMax) * (PB - PT); }
 
@@ -61,7 +62,7 @@
     add(gAx, 'line', { x1: PL, x2: PL, y1: PT - 6, y2: PB });
     add(gAx, 'line', { x1: PL, x2: PR, y1: PB, y2: PB });
     for (var v2 = 0; v2 <= C.yMax; v2 += C.yStep) add(gAx, 'text', { x: PL - 10, y: iy(v2) + 4.5, 'text-anchor': 'end' }, v2);
-    C.xLabels.forEach(function (l, i) {
+    (C.xLabels || []).forEach(function (l, i) {
       add(gAx, 'line', { x1: ix(i), x2: ix(i), y1: PB, y2: PB + 5 });
       add(gAx, 'text', { x: ix(i), y: PB + 22, 'text-anchor': 'middle' }, l);
     });
@@ -69,7 +70,7 @@
     add(svg, 'text', { 'class': 'axtitle', transform: 'translate(16 ' + ((PT + PB) / 2) + ') rotate(-90)', 'text-anchor': 'middle' }, C.yTitle);
 
     var serG = {};
-    C.series.forEach(function (se) {
+    (C.series || []).forEach(function (se) {
       var g = add(svg, 'g', { 'class': 'ser on', 'data-id': se.id });
       var pts = se.data.map(function (d, i) { return ix(i) + ',' + iy(d); }).join(' ');
       add(g, 'polyline', { 'class': 'ln', points: pts, stroke: se.color });
@@ -83,12 +84,16 @@
       serG[se.id] = { g: g, mks: mks, vals: vals };
     });
     var gTags = add(svg, 'g', { 'class': 'tags' });
-    $('chart').appendChild(svg);
+    var pie = null;
+    if (C.type === 'pie') {
+      $('chart').classList.add('piehost'); $('legend').hidden = true;
+      pie = window.PieChart($('chart'), C, { h: 360 });
+    } else $('chart').appendChild(svg);
 
     /* легенда */
     var legend = $('legend');
     var legBtn = {};
-    C.series.forEach(function (se) {
+    (C.series || []).forEach(function (se) {
       var b = document.createElement('button');
       b.type = 'button';
       var sv = document.createElementNS(NS, 'svg');
@@ -110,10 +115,11 @@
     function applyHL(hl, isManual) {
       hl = hl || {};
       if (!isManual) { curHL = hl; manual = null; }
+      if (pie) { pie.setHL(hl); return; }
       var hasFocus = !!hl.s;
       svg.classList.toggle('focus', hasFocus);
       svg.classList.toggle('axes-on', !!hl.axes);
-      C.series.forEach(function (se) {
+      (C.series || []).forEach(function (se) {
         var on = !hasFocus || hl.s.indexOf(se.id) > -1;
         serG[se.id].g.classList.toggle('on', on);
         legBtn[se.id].classList.toggle('dim', hasFocus && !on);

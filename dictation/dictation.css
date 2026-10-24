@@ -95,3 +95,18 @@ textarea:focus{outline:none;border-color:var(--c,var(--g))}textarea:disabled{bac
 .how{line-height:1.6;padding-left:20px}.tip{font-size:14px;color:#4a5a52}
 [hidden]{display:none!important}
 button{font-family:inherit}
+
+.top .tools{display:flex;gap:8px}
+
+/* кругові діаграми */
+#chart.piehost{display:flex;flex-direction:column;justify-content:center;gap:6px}
+#chart.piehost svg{height:auto}
+.lc.pie text{font-family:var(--sans)}
+.lc .ptitle{font-family:var(--serif);font-size:22px;font-weight:700;fill:#1A3A2D;transition:fill .3s}
+.lc .ptitle.on{fill:#E8530F}
+.lc .pv{font-size:17px;font-weight:700;paint-order:stroke;stroke:rgba(0,0,0,.18);stroke-width:2px;stroke-linejoin:round}
+.pie .pc{transition:opacity .4s}.pie .pc.dim{opacity:.16}
+.pie .sl{transition:opacity .4s,transform .3s}.pie .sl.dim{opacity:.2}
+.lc-leg .sw{width:14px;height:14px;border-radius:4px;display:inline-block}
+
+.lc .pv.out{stroke:none;paint-order:normal}
