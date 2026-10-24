@@ -5,7 +5,7 @@ window.DECK = {
     brandSub: 'Write It Right · Module 1: Line Graphs',
     credit: 'Elena Kurilets  ·  @english_rrs  ·  englishkurilets.com',
     where: 'IELTS Writing Task 1  ·  Module 1: Line Graphs',
-    next: { label: 'Пишемо разом →', url: '../writing-studio/index.html?t=line-1' }
+    next: { label: 'Пишемо разом →', url: '../index.html?t=line-1' }
   },
   chart: {
     title: 'Monthly Revenue of Jewellery & Co.',

@@ -173,8 +173,8 @@
   }
   window.addEventListener('resize', fit);
   var faces = ['right', 'bubble', 'off'], faceName = { right: 'справа', bubble: 'куточок', off: 'немає' };
-  var fi = Math.max(0, faces.indexOf(store('dk-face') || 'right'));
-  function setFace(i) { fi = (i + faces.length) % faces.length; stage.dataset.face = faces[fi]; $('faceBtn').textContent = 'Камера: ' + faceName[faces[fi]]; store('dk-face', faces[fi]); }
+  var fi = 2;
+  function setFace(i) { fi = (i + faces.length) % faces.length; stage.dataset.face = faces[fi];  }
   setFace(fi);
   function toggleClean() { document.body.classList.toggle('clean'); fit(); }
   function toggleFull() { if (document.fullscreenElement) document.exitFullscreen(); else if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen(); }
@@ -191,7 +191,7 @@
   $('tocBtn').onclick = function () { toggleOv('toc', true); }; $('tocClose').onclick = function () { toggleOv('toc', false); };
   $('helpBtn').onclick = function () { toggleOv('help', true); }; $('helpClose').onclick = function () { toggleOv('help', false); };
   ['toc', 'help'].forEach(function (id) { $(id).addEventListener('click', function (e) { if (e.target === this) this.hidden = true; }); });
-  $('next').onclick = next; $('prev').onclick = prev; $('faceBtn').onclick = function () { setFace(fi + 1); };
+  $('next').onclick = next; $('prev').onclick = prev; 
   $('clean').onclick = toggleClean; $('full').onclick = toggleFull;
 
   document.addEventListener('keydown', function (e) {
@@ -203,7 +203,6 @@
     else if (k === 'ArrowLeft' || k === 'Backspace' || k === 'PageUp') { e.preventDefault(); prev(); }
     else if (k === 'Home') go(0, false); else if (k === 'End') go(S.length - 1, true);
     else if (k === 'g' || k === 'G' || k === 'п' || k === 'П') toggleOv('toc', true);
-    else if (k === 'v' || k === 'V' || k === 'м' || k === 'М') setFace(fi + 1);
     else if (k === 'c' || k === 'C' || k === 'с' || k === 'С') toggleClean();
     else if (k === 'f' || k === 'F' || k === 'а' || k === 'А') toggleFull();
     else if (k === 'h' || k === 'H' || k === '?' || k === 'р' || k === 'Р') toggleOv('help', true);
