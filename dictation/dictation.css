@@ -112,3 +112,12 @@ button{font-family:inherit}
 .lc .pv.out{stroke:none;paint-order:normal}
 
 .line.uk{font-size:15px;color:#4b5651;background:#FFF8E3;border-radius:8px;padding:8px 12px}
+
+.lc.barc text{font-family:var(--sans)}
+.lc.barc .grid line{stroke:#e8e3d6;stroke-width:1}
+.lc.barc .axis line{stroke:#8b928e;stroke-width:1.4}
+.lc.barc .axis text{fill:#4b5651;font-size:13.5px}
+.lc.barc .axtitle{fill:#4b5651;font-size:13.5px}
+.lc.barc .bg{transition:opacity .4s}.lc.barc .bg.dim{opacity:.16}
+.lc.barc .bv{font-size:12px;font-weight:700;fill:#1A3A2D;opacity:0;transition:opacity .3s;paint-order:stroke;stroke:#fff;stroke-width:3px;stroke-linejoin:round}
+.lc.barc .bv.show{opacity:1}

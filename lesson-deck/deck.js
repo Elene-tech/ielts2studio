@@ -21,8 +21,8 @@
   function head(root, d) { root.appendChild(h('h2', 's-title', d.title)); if (d.sub) root.appendChild(h('p', 's-sub', d.sub)); else root.appendChild(h('div', null)).style.height = '14px'; }
   function chartCard(ctx, d, o) {
     o = o || {};
-    var c = h('div', 'chart-card'); c.appendChild(h('div', 'ct', D.chart.title)); if (D.chart.fmt) c.appendChild(h('div', 'apx', '≈ значення зчитані наближено: на іспиті точних цифр немає'));
-    ctx.chart = (D.chart.type === 'pie' ? window.PieChart : window.LineChart)(c, D.chart, { h: o.h || (D.chart.type === 'pie' ? 340 : 410) });
+    var CH = d.chart || D.chart, c = h('div', 'chart-card'); c.appendChild(h('div', 'ct', CH.title)); if (CH.fmt) c.appendChild(h('div', 'apx', '≈ значення зчитані наближено: на іспиті точних цифр немає'));
+    ctx.chart = (CH.type === 'pie' ? window.PieChart : CH.type === 'bar' ? window.BarChart : window.LineChart)(c, CH, { h: o.h || (CH.type === 'pie' ? 340 : CH.type === 'bar' ? 380 : 410) });
     return c;
   }
 
@@ -98,7 +98,7 @@
     return r;
   };
   R.model = function (d, ctx) {
-    var r = h('div'); head(r, d); var g = h('div', 'two m' + (D.chart.type === 'pie' ? ' pie' : '')); r.appendChild(g);
+    var r = h('div'); head(r, d); var g = h('div', 'two m' + (D.chart.type === 'pie' || D.chart.type === 'bar' ? ' pie' : '')); r.appendChild(g);
     var left = h('div', 'mcol'); g.appendChild(left);
     var card = h('div', 'mcard'); setCol(card, d.k); card.appendChild(h('div', 'mh', d.label)); var p = h('p'); card.appendChild(p); left.appendChild(card);
     var chipsLbl = null, chips = null;
@@ -140,7 +140,21 @@
       if (ctx) fr(ctx, e);
     });
   }
-  R.full = function (d, ctx) { var r = h('div'); head(r, d); var b = h('div', 'fullbox'); r.appendChild(b); buildFull(b, ctx); return r; };
+  R.full = function (d, ctx) {
+    var r = h('div'); head(r, d);
+    if (d.withChart) { var g = h('div', 'two fw'); r.appendChild(g); var b0 = h('div', 'fullbox'); g.appendChild(b0); buildFull(b0, ctx); var c0 = chartCard(ctx, d, { h: 360 }); g.appendChild(c0); fr(ctx, c0, {}); return r; }
+    var b = h('div', 'fullbox'); r.appendChild(b); buildFull(b, ctx); return r;
+  };
+  R.matrix = function (d, ctx) {
+    var r = h('div'); head(r, d); var g = h('div', 'mx'); g.style.gridTemplateColumns = '150px repeat(' + d.head.length + ',1fr)'; r.appendChild(g);
+    g.appendChild(h('div', 'mh0', '')); d.head.forEach(function (t) { g.appendChild(h('div', 'mh1', t)); });
+    d.rows.forEach(function (x) {
+      var els = [h('div', 'mrl', x.label)]; els[0].style.setProperty('--c', (COL[x.k] || COL.blue)[0]);
+      x.cells.forEach(function (t) { els.push(h('div', 'mc', kw(t))); });
+      els.forEach(function (e) { g.appendChild(e); }); fr(ctx, els);
+    });
+    return r;
+  };
   R.dual = function (d, ctx) {
     var r = h('div'); head(r, d);
     if (d.top) { var g = h('div', 'stack'); row(d.top, ctx, g); r.appendChild(g); }
@@ -191,6 +205,8 @@
   D.slides.forEach(function (d) {
     var ctx = { frags: [], chart: null };
     var root = R[d.type](d, ctx);
+    if (d.footnote) { var fn = h('div', 'note', kw(d.footnote)); root.appendChild(fn); fr(ctx, fn); }
+    if (d.cls) root.classList.add(d.cls);
     root.classList.add('slide', 't-' + d.type); root.style.display = 'none'; wrap.appendChild(root);
     S.push({ d: d, root: root, frags: ctx.frags, chart: ctx.chart });
   });

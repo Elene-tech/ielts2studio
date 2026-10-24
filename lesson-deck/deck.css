@@ -355,3 +355,27 @@ body.nohints .hints{display:none}
 .two.m.pie .mcol{gap:8px}
 
 .lc .pv.out{stroke:none;paint-order:normal}
+
+/* стовпчикові діаграми */
+.lc.barc text{font-family:var(--sans)}
+.lc.barc .axis text{fill:#4b5651;font-size:13.5px}
+.lc.barc .bg{transition:opacity .4s}.lc.barc .bg.dim{opacity:.16}
+.lc.barc .bv{font-size:12px;font-weight:700;fill:#1A3A2D;opacity:0;transition:opacity .3s;paint-order:stroke;stroke:#fff;stroke-width:3px;stroke-linejoin:round}
+.lc.barc .bv.show{opacity:1}
+
+.two.fw{display:grid;grid-template-columns:1fr 520px;gap:18px;flex:1;min-height:0;align-items:start}
+.two.fw .fullbox{max-height:520px}.two.fw .fp p{font-size:15px;line-height:1.45}
+.mx{display:grid;gap:6px;margin-top:6px}
+.mx .mh1{background:#2C6E8A;color:#fff;font-weight:700;font-size:13px;letter-spacing:1.2px;padding:10px 12px;border-radius:8px}
+.mx .mrl{font-weight:700;font-size:15.5px;color:var(--c);background:#fff;border:1px solid #e3ddcf;border-left:5px solid var(--c);border-radius:8px;padding:12px 12px;display:flex;align-items:center}
+.mx .mc{background:#fff;border:1px solid #e3ddcf;border-radius:8px;padding:12px 14px;font-size:16px;line-height:1.4}
+.note{margin-top:10px}
+
+.t-dual.sm .cols.txt .pl{font-size:15.5px;line-height:1.38;margin-bottom:6px}
+.t-dual.sm .col h3{font-size:16px}
+
+.t-stack.tight .row{padding-top:7px;padding-bottom:7px}.t-stack.tight .way{margin-top:0;padding:3px 14px}
+.two.fw{grid-template-columns:1fr 470px}.two.fw .fp{padding:8px 14px}.two.fw .fp p{font-size:14px;line-height:1.42}.two.fw .fullbox{gap:8px;max-height:none}
+.t-stack.tight .stack{gap:8px}.t-stack.tight .row .bd2{padding:6px 16px}.t-stack.tight .ways-lbl{margin:4px 0 4px}.t-stack.tight .way{margin-bottom:3px;padding:4px 14px}
+
+.t-quad.chk .qd p::before{content:none}
