@@ -8,8 +8,8 @@
   function tint(el, k) { el.style.setProperty('--c', sec(k).color); el.style.setProperty('--b', sec(k).bg); }
 
   $('prompt').textContent = D.prompt; $('promptTail').textContent = D.promptTail; $('chartTitle').textContent = D.chart.title;
-  var chart = D.chart.type === 'pie' ? window.PieChart($('chart'), D.chart, { h: 360 }) : D.chart.type === 'bar' ? window.BarChart($('chart'), D.chart, { h: 360 }) : window.LineChart($('chart'), D.chart, { h: 380 });
-  if (D.chart.type === 'pie' || D.chart.type === 'bar') $('chart').classList.add('piehost');
+  var chart = D.chart.type === 'pie' ? window.PieChart($('chart'), D.chart, { h: 360 }) : D.chart.type === 'bar' ? window.BarChart($('chart'), D.chart, { h: 360 }) : D.chart.type === 'table' ? window.TableChart($('chart'), D.chart, { h: 360 }) : window.LineChart($('chart'), D.chart, { h: 380 });
+  if (D.chart.type === 'pie' || D.chart.type === 'bar' || D.chart.type === 'table') $('chart').classList.add('piehost');
   if (D.links) { if (D.links.theory) $('lnkTheory').href = D.links.theory; if (D.links.studio) $('lnkStudio').href = D.links.studio; }
   if (D.note) $('apxnote').innerHTML = D.note;
   if (D.title) $('ttl').textContent = D.title.replace(' · ', ': ');

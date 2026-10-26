@@ -104,7 +104,6 @@ window.DECK = {
 
     { type: 'section', num: '4', title: 'The Model Answer', sub: 'Band 8 response — annotated and explained', section: 'Model Answer' },
 
-    { type: 'full', section: 'Model Answer', title: 'Full Band 8 Model Answer', sub: '210 words  ·  4 paragraphs  ·  logical structure  ·  Band 8 vocabulary' },
 
     { type: 'model', section: 'Model Answer', title: '§1 — Introduction: Breakdown', k: 'blue', label: '§1  INTRO',
       segs: [{ t: 'The two pie charts {{compare}} how household electricity {{is consumed}} across different purposes in a mid-sized coastal town, distinguishing between homes equipped with rooftop solar panels and those without.', hl: { sl: { solar: 'all', non: 'all' } }, chips: [['compare how … is consumed', '= paraphrase of "show how … is used"']] }] },
@@ -126,6 +125,8 @@ window.DECK = {
         { t: 'Space cooling or heating {{followed}} at 27%, meaning that these two categories alone {{accounted for over half}} of all electricity.', hl: { sl: { non: ['water', 'space'] } }, chips: [['③ followed', 'ranking verb for the second-place category'], ['④ accounted for over half', 'synthesis phrase — combines two figures into one strong claim']] },
         { t: 'Refrigeration stood at 16%, while electronics and appliances and EV charging {{represented}} 15% and 11% {{respectively}}.', hl: { sl: { non: ['fridge', 'elec', 'ev'] } }, chips: [['⑤ represented … respectively', 'pairs two figures with two categories in one clause']] },
         { t: 'Notably, lighting was absent from this breakdown, {{suggesting}} that it either consumed a negligible amount or was grouped with another category.', hl: { sl: { solar: ['light'], non: 'all' } }, chips: [['⑥ suggesting', 'handles a data gap gracefully — shows analytical maturity']] }] },
+
+    { type: 'full', section: 'Model Answer', title: 'Full Band 8 Model Answer', sub: '210 words  ·  4 paragraphs  ·  logical structure  ·  Band 8 vocabulary' },
 
     { type: 'section', num: '5', title: 'Vocabulary Deep Dive', sub: '25+ items — with examiner tips and examples', section: 'Vocabulary Deep Dive' },
 

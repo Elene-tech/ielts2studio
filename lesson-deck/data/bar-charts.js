@@ -13,7 +13,7 @@ window.DECK = {
     dict: '../dictation/index.html?t=bar-1'
   },
   chart: {
-    type: 'bar',
+    type: 'bar', approx: true, fmt: 'approx',
     title: 'Average monthly spending on entertainment, UK 2022 (£)',
     yTitle: '£ per month', yMax: 140, yStep: 20, pre: '£',
     cats: ['Eating out', 'Video games', 'Sports & fitness', 'Books & music', 'Cinema & theatre', 'Streaming'],
@@ -53,19 +53,23 @@ window.DECK = {
         { k: 'gold', head: 'Task Achievement  ·  25%', items: [`Band 7+ requires:`, `· a clear overview — the leading group overall + the sharpest contrast`, `· key features selected, not every bar described`, `· data that supports the overview`, `Weakest point of most Band 5 answers.`] },
         { k: 'blue', head: 'Coherence & Cohesion  ·  25%', items: [`Band 7+ requires:`, `· exactly 4 paragraphs with clear roles`, `· categories grouped logically — high-spending vs reversed patterns`, `· two groups compared in one sentence: whereas, while, unlike`, `Structure is decided before you start writing.`] },
         { k: 'red', head: 'Lexical Resource  ·  25%', items: [`Band 7+ requires:`, `· comparative structures: considerably more than, twice as much as`, `· spending verbs beyond «spent»: allocated, outspent, recorded`, `· intensity adverbs matched to the gap: slightly → markedly`, `The only criterion most courses teach. We do it in one matrix.`] },
-        { k: 'green', head: 'Grammar Range & Accuracy  ·  25%', items: [`Band 7+ requires:`, `· past simple — the chart is dated 2022`, `· comparative grammar: more than, as much as, the figure for`, `· correct articles with data phrases`, `Where Ukrainian speakers lose the most «invisible» points — see p.16.`] }],
+        { k: 'green', head: 'Grammar Range & Accuracy  ·  25%', items: [`Band 7+ requires:`, `· past simple — the chart is dated 2022`, `· comparative grammar: more than, as much as, the figure for`, `· correct articles with data phrases`, `Where Ukrainian speakers lose the most «invisible» points — see p.18.`] }],
       footnote: 'Watch for the criterion tags on the following pages — every technique you learn here is mapped to the exact 25% it improves.' },
 
     { type: 'task', section: 'The Task', title: 'The Task', sub: 'ENTERTAINMENT SPENDING BY AGE GROUP — UNITED KINGDOM, 2022  ·  20 min  ·  150+ words  ·  4 paragraphs',
       prompt: `The bar chart below shows the average monthly spending on six entertainment categories by three age groups in the UK in 2022. Summarise the information by selecting and reporting the main features, and make comparisons where relevant. Write at least 150 words.`,
-      footnote: 'Before you read on: look at the chart for one minute and answer the four questions on the next page for yourself. Your answers become the plan of your answer.' },
+      footnote: 'Before you read on: look at the chart for one minute and answer the four questions on the next page for yourself. Your answers become the plan of your answer. На іспиті біля стовпчиків немає цифр: значення зчитуємо по осі, тому на діаграмі вони позначені ≈.' },
 
     { type: 'questions', section: 'The Task', title: 'How to Read a Bar Chart in 60 Seconds', sub: 'FOUR QUESTIONS TO ANSWER BEFORE YOU WRITE A SINGLE WORD',
       items: [
         { n: '01', q: 'What do the charts show?', uk: 'Monthly spending by three age groups across six entertainment categories — groups to compare, not a timeline to narrate.', hl: { legend: true } },
         { n: '02', q: 'What is being measured?', uk: 'Pounds per month (£) for each age group — absolute values, not shares. The gap between the bars is your story.', hl: { vals: true } },
         { n: '03', q: 'Is there a time frame?', uk: 'One date: 2022. That locks your grammar: past simple — but NO trend verbs, because a single year never moves. (Bars with several years are a different animal.)', hl: {} },
-        { n: '04', q: 'What are the two biggest stories? — this becomes your overview', uk: '18–30 year olds spend the most overall, while 31–50 lead only on eating out (£120); the sharpest gaps are video games (£62 vs £8) and books (£14 vs £38) — in opposite directions.', hl: { c: [0, 1, 3] } }] },
+        { n: '04', q: 'What are the two biggest stories? — this becomes your overview', hl0: {}, steps: [
+          { t: '18–30 year olds spend the most overall,', hl: { s: ['a'], vals: false } },
+          { t: 'while 31–50 lead only on eating out (≈£120);', hl: { c: [0] } },
+          { t: 'the sharpest gaps are video games (≈£62 vs ≈£8)', hl: { c: [1] } },
+          { t: 'and books (≈£14 vs ≈£38) — in opposite directions.', hl: { c: [3] } }] }] },
 
     { type: 'stack', cls: 'tight', section: 'Method', title: 'The 4-Paragraph Framework', sub: 'THE SAME SKELETON AS MODULE 1 — ONLY THE VOCABULARY ENGINE CHANGES',
       rows: [
@@ -98,7 +102,6 @@ window.DECK = {
         { k: 'red', head: 'BODY 2 (§4) — the reversed + similar categories', items: [`Books + Cinema + Streaming — where the pattern flips.`, `Key data points to hit:`, `· books & music — reversed: the oldest lead, £38 vs £14`, `· cinema & theatre — the oldest outspend again: £35`, `· streaming — the exception: «broadly similar» for the two younger groups, £42 vs £38`, `Open with «In contrast, …» — the linker signals the switch of focus.`] }],
       footnote: 'KEY RULE — group by BEHAVIOUR, not by position on the x-axis. Grouping by age group (§3 the 18–30s, §4 the 51–70s) would also work — pick whichever structure makes your two «big stories» easiest to see.' },
 
-    { type: 'full', withChart: true, section: 'Model', title: 'The Band 8 Model Answer', sub: '~180 WORDS · READ IT WITH THE CHART IN VIEW — WE TAKE IT APART ON THE NEXT PAGES' },
 
     { type: 'model', section: 'Model', title: 'Model Anatomy — §1 Introduction', k: 'blue', label: '§1  INTRODUCTION',
       segs: [{ t: `The bar chart {{compares}} the {{average monthly expenditure}} of {{three age groups}} — 18–30, 31–50 and 51–70 year olds — across {{six entertainment categories}} in the UK {{in 2022}}.`, hl: { vals: false, c: [0, 1, 2, 3, 4, 5] },
@@ -124,6 +127,8 @@ window.DECK = {
           chips: [['① In contrast', 'opens Body 2 — the signal of the focus switch'], ['② a reversed pattern', 'names the flip in one phrase; «markedly» matches a >60% gap']] },
         { t: `Cinema followed the same direction, with the oldest group again {{outspending}} both others, while streaming was {{broadly similar}} for the two younger groups, at £42 and £38.`, hl: { c: [4, 5] },
           chips: [['③ outspending', 'a Band 8 verb: the comparison lives inside the verb'], ['④ broadly similar', 'how to report a near-tie: name the two close figures']] }] },
+
+    { type: 'full', withChart: true, section: 'Model', title: 'The Band 8 Model Answer', sub: '~180 WORDS · THE COMPLETE ANSWER — NOW READ IT AS ONE TEXT, WITH THE CHART IN VIEW' },
 
     { type: 'matrix', section: 'Vocabulary', title: 'The Comparative Toolkit — Size of Gap × Structure', sub: 'PICK THE CELL THAT MATCHES THE GAP — GAP SIZE × PHRASE TYPE — LEXICAL RESOURCE',
       head: ['ADVERB + COMPARATIVE', 'MULTIPLIERS', 'CONTRAST CONNECTORS'],
@@ -151,7 +156,7 @@ window.DECK = {
       html: `18–30 year olds <u>spent a lot more</u> on video games than 51–70 year olds. <u>They spent £62</u> and 51–70 spent <u>only £8</u>. 31–50 year olds spent <u>the biggest amount</u> on eating out at £120. <u>This was more than the other groups.</u>`,
       label: 'THE 5 PHRASES YOU MUST REPLACE — WRITE YOUR VERSIONS:',
       items: [['spent a lot more', '→ ______________'], ['They spent £62 … (new sentence)', '→ ______________'], ['only £8', '→ ______________'], ['the biggest amount', '→ ______________'], ['This was more than the other groups', '→ ______________']],
-      footnote: 'Your task: rewrite the paragraph using the comparative toolkit (p.14) and the precision table (p.15). Keep every fact — change every phrase. And merge the separate sentences: compare inside one sentence. Не підглядай далі, доки не напишеш свій варіант.\nHint: every replacement already exists on pages 14–15. You are not inventing vocabulary — you are spending it. Remember: 2022 = past simple, but zero trend verbs.' },
+      footnote: 'Your task: rewrite the paragraph using the comparative toolkit (p.16) and the precision table (p.17). Keep every fact — change every phrase. And merge the separate sentences: compare inside one sentence. Не підглядай далі, доки не напишеш свій варіант.\nHint: every replacement already exists on pages 16–17. You are not inventing vocabulary — you are spending it. Remember: 2022 = past simple, but zero trend verbs.' },
 
     { type: 'rewrite', section: 'Challenge', title: 'Upgrade Reveal — the Band 8 Version', sub: 'COMPARE WITH YOUR VERSION — FOUR SENTENCES BECAME TWO',
       html: `18–30 year olds spent <u>nearly eight times as much</u> on video games as 51–70 year olds, <u>recording £62</u> compared to <u>a negligible £8</u>. Meanwhile, 31–50 year olds <u>dominated eating out expenditure</u> across all groups at £120 per month — <u>noticeably more than</u> the 18–30s (£95) and <u>far more than</u> the 51–70s (£68).`,
@@ -160,7 +165,7 @@ window.DECK = {
       footnote: 'Four sentences became two — and every comparison now lives inside one sentence. Your version differs? Good. Check: multiplier honest, adverbs matched to gaps?' },
 
     { type: 'task', section: 'Practice', title: 'Practice Task 2 — Exam Conditions', sub: 'SAME RULES, NEW CHART — GROUP BY WHO LEADS, NOT ACTIVITY BY ACTIVITY',
-      chart: { type: 'bar', title: 'Weekly leisure hours by gender, UK 2022', yTitle: 'hours per week', yMax: 18, yStep: 2, cats: ['Watching TV', 'Reading', 'Sport', 'Socialising', 'Gaming'],
+      chart: { type: 'bar', approx: true, fmt: 'approx', title: 'Weekly leisure hours by gender, UK 2022', yTitle: 'hours per week', yMax: 18, yStep: 2, cats: ['Watching TV', 'Reading', 'Sport', 'Socialising', 'Gaming'],
         series: [{ id: 'm', name: 'Men', color: '#2C6E8A', data: [15, 4, 8, 9, 10] }, { id: 'w', name: 'Women', color: '#B8527E', data: [13, 7, 4, 8, 3] }] },
       prompt: `The bar chart below shows the average number of hours per week that men and women in the UK spent on five leisure activities in 2022. Summarise the information by selecting and reporting the main features, and make comparisons where relevant. Write at least 150 words.`,
       footnote: 'EXAM RULES: Set a 20:00 timer — stop when it rings  ·  3 min: answer the four questions from p.6  ·  Group by behaviour: where men lead vs where the pattern flips  ·  15 min: write §1 → §2 → §3 → §4  ·  2 min: past simple + zero trend verbs' },

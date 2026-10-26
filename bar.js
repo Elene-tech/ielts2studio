@@ -10,7 +10,7 @@
     opts = opts || {};
     var W = 680, H = opts.h || 380, PL = 58, PR = 662, PT = 24, PB = H - 62, nC = def.cats.length, nS = def.series.length;
     function iy(v) { return PB - (v / def.yMax) * (PB - PT); }
-    var gw = (PR - PL) / nC, bw = Math.min(30, (gw * 0.78) / nS), pre = def.pre || '', suf = def.suf || '';
+    var gw = (PR - PL) / nC, bw = Math.min(30, (gw * 0.78) / nS), pre = (def.approx ? '≈' : '') + (def.pre || ''), suf = def.suf || '';
     var svg = document.createElementNS(NS, 'svg'); svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H); svg.setAttribute('class', 'lc barc'); svg.setAttribute('role', 'img'); svg.setAttribute('aria-label', def.title || '');
     var gg = add(svg, 'g', { 'class': 'grid' });
     for (var v = 0; v <= def.yMax; v += def.yStep) add(gg, 'line', { x1: PL, x2: PR, y1: iy(v), y2: iy(v) });
@@ -28,7 +28,7 @@
       def.series.forEach(function (se, si) {
         var val = se.data[ci], g = add(svg, 'g', { 'class': 'bg' }), x = x0 + si * bw, y = iy(val);
         var r = add(g, 'rect', { x: x + 1, y: y, width: bw - 2, height: Math.max(0, PB - y), fill: se.color, rx: 2 });
-        var tv = add(g, 'text', { 'class': 'bv', x: x + bw / 2, y: y - 6, 'text-anchor': 'middle' }, pre + val + suf);
+        var tv = add(g, 'text', { 'class': 'bv' + (def.approx ? ' ap' : ''), x: x + bw / 2, y: y - 6, 'text-anchor': 'middle' }, pre + val + suf);
         B[ci][si] = { g: g, tv: tv };
       });
     });

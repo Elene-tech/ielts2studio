@@ -7,7 +7,7 @@
     { n: 1, name: 'Line Graphs',      m: 'line-graph', t: 'line-1', theory: 'lesson-deck/index.html?m=line-graph', studio: 'index.html?t=line-1', dict: 'dictation/index.html?t=line-1' },
     { n: 2, name: 'Pie Charts',       m: 'pie-charts', t: 'pie-1',  theory: 'lesson-deck/index.html?m=pie-charts', studio: 'index.html?t=pie-1',  dict: 'dictation/index.html?t=pie-1' },
     { n: 3, name: 'Bar Charts',       m: 'bar-charts', t: 'bar-1',  theory: 'lesson-deck/index.html?m=bar-charts', studio: 'index.html?t=bar-1',  dict: 'dictation/index.html?t=bar-1' },
-    { n: 4, name: 'Tables',           soon: true },
+    { n: 4, name: 'Tables',           m: 'tables',     t: 'table-1', theory: 'lesson-deck/index.html?m=tables',     studio: 'index.html?t=table-1', dict: 'dictation/index.html?t=table-1' },
     { n: 5, name: 'Process Diagrams', soon: true },
     { n: 6, name: 'Maps',             soon: true }
   ];

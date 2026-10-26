@@ -22,7 +22,7 @@
   function chartCard(ctx, d, o) {
     o = o || {};
     var CH = d.chart || D.chart, c = h('div', 'chart-card'); c.appendChild(h('div', 'ct', CH.title)); if (CH.fmt) c.appendChild(h('div', 'apx', '≈ значення зчитані наближено: на іспиті точних цифр немає'));
-    ctx.chart = (CH.type === 'pie' ? window.PieChart : CH.type === 'bar' ? window.BarChart : window.LineChart)(c, CH, { h: o.h || (CH.type === 'pie' ? 340 : CH.type === 'bar' ? 380 : 410) });
+    ctx.chart = (CH.type === 'pie' ? window.PieChart : CH.type === 'bar' ? window.BarChart : CH.type === 'table' ? window.TableChart : window.LineChart)(c, CH, { h: o.h || (CH.type === 'pie' ? 340 : CH.type === 'bar' ? 380 : 410) });
     return c;
   }
 
@@ -56,7 +56,13 @@
     var r = h('div'); head(r, d); var g = h('div', 'two q'); r.appendChild(g);
     var qs = h('div', 'qs'); g.appendChild(qs);
     var c = chartCard(ctx, d); g.appendChild(c);
-    d.items.forEach(function (x) { var e = h('div', 'qc', '<div class="n">' + x.n + '</div><b>' + x.q + '</b><span>' + x.uk + '</span>'); qs.appendChild(e); fr(ctx, e, x.hl, e); });
+    d.items.forEach(function (x) {
+      var e = h('div', 'qc', '<div class="n">' + x.n + '</div><b>' + x.q + '</b><span>' + (x.steps ? '' : x.uk) + '</span>'); qs.appendChild(e);
+      if (x.steps) {
+        var sp = e.querySelector('span'); fr(ctx, e, x.hl0 || {}, e);
+        x.steps.forEach(function (st) { var s = h('span', 'stp', st.t); sp.appendChild(s); sp.appendChild(document.createTextNode(' ')); fr(ctx, s, st.hl, s); });
+      } else fr(ctx, e, x.hl, e);
+    });
     return r;
   };
   function row(r, ctx, g) {
@@ -98,9 +104,9 @@
     return r;
   };
   R.model = function (d, ctx) {
-    var r = h('div'); head(r, d); var g = h('div', 'two m' + (D.chart.type === 'pie' || D.chart.type === 'bar' ? ' pie' : '')); r.appendChild(g);
+    var r = h('div'); head(r, d); var g = h('div', 'two m' + (D.chart.type === 'pie' || D.chart.type === 'bar' || D.chart.type === 'table' ? ' pie' : '')); r.appendChild(g);
     var left = h('div', 'mcol'); g.appendChild(left);
-    var card = h('div', 'mcard'); setCol(card, d.k); card.appendChild(h('div', 'mh', d.label)); var p = h('p'); card.appendChild(p); left.appendChild(card);
+    var card = h('div', 'mcard' + (D.chart.type !== 'bar' && (d.segs.reduce(function (n, s) { return n + s.t.length; }, 0) > 260 || d.segs.reduce(function (n, s) { return n + (s.chips || []).length; }, 0) >= 4) ? ' long' : ''), null); setCol(card, d.k); card.appendChild(h('div', 'mh', d.label)); var p = h('p'); card.appendChild(p); left.appendChild(card);
     var chipsLbl = null, chips = null;
     if (d.segs.some(function (s) { return s.chips; })) { chipsLbl = h('div', 'chips-lbl', 'KEY VOCABULARY CHOICES:'); chips = h('div', 'chips'); left.appendChild(chipsLbl); left.appendChild(chips); }
     var c = chartCard(ctx, d); g.appendChild(c);

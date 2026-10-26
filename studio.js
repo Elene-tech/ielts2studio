@@ -85,9 +85,9 @@
     });
     var gTags = add(svg, 'g', { 'class': 'tags' });
     var pie = null;
-    if (C.type === 'pie' || C.type === 'bar') {
+    if (C.type === 'pie' || C.type === 'bar' || C.type === 'table') {
       $('chart').classList.add('piehost'); $('legend').hidden = true;
-      pie = (C.type === 'bar' ? window.BarChart : window.PieChart)($('chart'), C, { h: 360 });
+      pie = (C.type === 'table' ? window.TableChart : C.type === 'bar' ? window.BarChart : window.PieChart)($('chart'), C, { h: 360 });
     } else $('chart').appendChild(svg);
 
     /* легенда */

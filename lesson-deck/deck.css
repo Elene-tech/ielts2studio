@@ -379,3 +379,52 @@ body.nohints .hints{display:none}
 .t-stack.tight .stack{gap:8px}.t-stack.tight .row .bd2{padding:6px 16px}.t-stack.tight .ways-lbl{margin:4px 0 4px}.t-stack.tight .way{margin-bottom:3px;padding:4px 14px}
 
 .t-quad.chk .qd p::before{content:none}
+
+/* ---- TableChart ---- */
+.lc.tblc{display:flex;align-items:center;justify-content:center;font-family:var(--sans)}
+.tblc table{border-collapse:separate;border-spacing:0;width:100%;table-layout:fixed;font-size:15px;color:#1d2a24;border:1px solid #d9d2bf;border-radius:10px;overflow:hidden}
+.tblc th,.tblc td{padding:8px 6px;text-align:center;border-bottom:1px solid #ece6d6;border-right:1px solid #ece6d6;line-height:1.2;transition:opacity .35s,background .35s,color .35s}
+.tblc tr>*:last-child{border-right:0}.tblc tbody tr:last-child>*{border-bottom:0}
+.tblc thead th{background:#1A3A2D;color:#fff;font-size:12.5px;font-weight:700;border-color:#2c5242}
+.tblc thead th.corner{text-align:left;font-size:11.5px;letter-spacing:.4px;padding-left:10px;width:30%}
+.tblc th.rh{text-align:left;font-weight:700;background:#F7F4EE;padding-left:10px;font-size:13.5px;color:#1A3A2D}
+.tblc td{font-weight:600;font-size:16px;background:#fff}
+.tblc tbody tr:nth-child(even) td{background:#FBF9F4}
+.tblc .dim{opacity:.22}
+.tblc td.hi{background:#FFF0CC!important;color:#7a5410;font-weight:800;box-shadow:inset 0 0 0 2px #E1A92E}
+.tblc thead th.hi,.tblc th.rh.hi{box-shadow:none}
+.tblc.pulse thead th:not(.corner),.tblc.pulse th.rh{animation:tpulse 1.2s ease 2}
+@keyframes tpulse{50%{background:#E1512E;color:#fff}}
+
+.t-questions.five .qs{gap:7px}.t-questions.five .qc{padding:7px 14px}.t-questions.five .qc .n{font-size:26px}.t-questions.five .qc b{font-size:15.5px}.t-questions.five .qc span{font-size:13px;line-height:1.3}
+.t-questions.five .two.q,.two.q:has(.qc:nth-child(5)){grid-template-columns:440px 1fr}
+.tblc thead th.dim,.tblc th.rh.dim{opacity:.5}
+
+/* bar: ≈ підписи, кроки в питанні, збільшений розбір моделі */
+.lc.barc .bv.ap{font-size:11.5px}
+.qc .stp.cur{color:var(--g);font-weight:700;background:#FFF0CC;border-radius:4px}
+.qc:has(.stp.cur){border-color:var(--gold);border-left-color:var(--gold);box-shadow:0 3px 14px rgba(201,168,76,.28)}
+#stage .two.m.pie,#stage:not([data-face="right"]) .two.m.pie{grid-template-columns:1fr 500px;gap:20px}
+.two.m.pie .mcard{padding:16px 24px}
+.two.m.pie .mcard p{font-size:21px;line-height:1.48}
+.two.m.pie .mcard .mh{font-size:14px}
+.two.m.pie .chips-lbl{font-size:13px}
+.two.m.pie .chips{gap:9px}
+.two.m.pie .chip{padding:7px 11px;font-size:14.5px;line-height:1.28}
+.two.m.pie .chip b{font-size:16px}
+.two.m.pie .mcol{gap:9px}
+.two.m.pie .chart-card .ct,.two.m.pie .chart-card .apx{display:none}
+.two.m.pie .chart-card{align-self:start;padding:6px 8px}
+.two.m.pie .lc.barc .bv.ap,.two.m.pie .lc.barc .bv{font-size:13px}
+.two.m.pie .lc.barc .axis text{font-size:16px}
+.two.m.pie .tblc td{font-size:15px;padding:6px 3px}.two.m.pie .tblc th.rh{font-size:12.5px}.two.m.pie .tblc thead th{font-size:11.5px}
+/* довгі абзаци розбору: трохи менший шрифт */
+.two.m.pie .mcard.long p{font-size:19px;line-height:1.45}
+.two.m.pie .mcard.long ~ .chips .chip{font-size:13.5px;padding:6px 10px}
+/* розбір моделі: ще крупніше */
+.two.m.pie .mcard p{font-size:25px;line-height:1.46}
+.two.m.pie .mcard.long p{font-size:21px;line-height:1.42}
+.two.m.pie .chip{font-size:16px}.two.m.pie .chip b{font-size:17.5px}
+.two.m.pie .mcard.long ~ .chips .chip{font-size:15px}
+.two.m.pie .mcard.long p{font-size:19.5px;line-height:1.4}
+.two.m.pie .mcard.long ~ .chips .chip{font-size:14px;padding:5px 9px}.two.m.pie .mcard.long ~ .chips .chip b{font-size:15px}
