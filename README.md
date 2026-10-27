@@ -30,3 +30,8 @@
 
 ## Файли
 `index.html` · `studio.css` · `studio.js` · `data/line-1.js` (завдання, дані й модель відповіді).
+
+## Module 5 · Process Diagrams
+Діаграми процесів малює `process.js` (ProcessChart): `layout:'flow'` (змійка), `'cycle'` (коло), `'branch'` (гілки); кожна картка має номер, емодзі, назву, пояснення й (за кнопкою voice) підпис PASSIVE або ACTIVE з дієсловом.
+Завдання: `index.html?t=process-1` (man-made, olive oil) і `index.html?t=process-2` (природний цикл, water cycle). Диктант: `dictation/index.html?t=process-1` (honey, змішаний процес), аудіо кладеться в `dictation/audio/process-1/01–10.mp3`. Колода: `lesson-deck/index.html?m=process`.
+У колоді розмітка тексту: `%%passive%%` синім, `@@active@@` рожевим.

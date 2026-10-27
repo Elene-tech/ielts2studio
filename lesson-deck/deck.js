@@ -5,7 +5,7 @@
   var D = window.DECK;
   function $(id) { return document.getElementById(id); }
   function h(tag, cls, html) { var e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; }
-  function kw(t) { return String(t).replace(/\{\{(.+?)\}\}/g, '<mark class="kw">$1</mark>').replace(/\[\[(.+?)\]\]/g, '<mark class="ap">$1</mark>').replace(/\n/g, '<br>'); }
+  function kw(t) { return String(t).replace(/\{\{(.+?)\}\}/g, '<mark class="kw">$1</mark>').replace(/\[\[(.+?)\]\]/g, '<mark class="ap">$1</mark>').replace(/%%(.+?)%%/g, '<mark class="pv">$1</mark>').replace(/@@(.+?)@@/g, '<mark class="ac">$1</mark>').replace(/\n/g, '<br>'); }
   function store(k, v) { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) {} return null; }
   var COL = {
     blue:  ['#2C6E8A', '#D6E8F5'], green: ['#2C7A5A', '#D6EDE4'], gold: ['#9A7020', '#FFF0CC'], red: ['#E1512E', '#FDDDD8'],
@@ -18,11 +18,11 @@
     if (cur) cur.setAttribute('data-cur', '1');
     ctx.frags.push({ els: els, hl: hl, cur: cur || null });
   }
-  function head(root, d) { root.appendChild(h('h2', 's-title', d.title)); if (d.sub) root.appendChild(h('p', 's-sub', d.sub)); else root.appendChild(h('div', null)).style.height = '14px'; }
+  function head(root, d) { root.appendChild(h('h2', 's-title', d.title)); if (d.sub) root.appendChild(h('p', 's-sub', kw(d.sub))); else root.appendChild(h('div', null)).style.height = '14px'; }
   function chartCard(ctx, d, o) {
     o = o || {};
     var CH = d.chart || D.chart, c = h('div', 'chart-card'); c.appendChild(h('div', 'ct', CH.title)); if (CH.fmt) c.appendChild(h('div', 'apx', '≈ значення зчитані наближено: на іспиті точних цифр немає'));
-    ctx.chart = (CH.type === 'pie' ? window.PieChart : CH.type === 'bar' ? window.BarChart : CH.type === 'table' ? window.TableChart : window.LineChart)(c, CH, { h: o.h || (CH.type === 'pie' ? 340 : CH.type === 'bar' ? 380 : 410) });
+    ctx.chart = (CH.type === 'process' ? window.ProcessChart : CH.type === 'pie' ? window.PieChart : CH.type === 'bar' ? window.BarChart : CH.type === 'table' ? window.TableChart : window.LineChart)(c, CH, { h: o.h || (CH.type === 'pie' ? 340 : CH.type === 'bar' ? 380 : 410), wide: !!o.wide });
     return c;
   }
 
@@ -50,7 +50,7 @@
   R.task = function (d, ctx) {
     var r = h('div'); head(r, d);
     var p = h('div', 'pr-box', d.prompt); r.appendChild(p); fr(ctx, p);
-    var c = chartCard(ctx, d); r.appendChild(c); fr(ctx, c, {}); return r;
+    var c = chartCard(ctx, d, { wide: true }); r.appendChild(c); fr(ctx, c, {}); return r;
   };
   R.questions = function (d, ctx) {
     var r = h('div'); head(r, d); var g = h('div', 'two q'); r.appendChild(g);
@@ -104,9 +104,11 @@
     return r;
   };
   R.model = function (d, ctx) {
-    var r = h('div'); head(r, d); var g = h('div', 'two m' + (D.chart.type === 'pie' || D.chart.type === 'bar' || D.chart.type === 'table' ? ' pie' : '')); r.appendChild(g);
+    var CT = (d.chart || D.chart).type, r = h('div'); head(r, d); var g = h('div', 'two m' + (CT === 'pie' || CT === 'bar' || CT === 'table' || CT === 'process' ? ' pie' : '')); r.appendChild(g);
     var left = h('div', 'mcol'); g.appendChild(left);
-    var card = h('div', 'mcard' + (D.chart.type !== 'bar' && (d.segs.reduce(function (n, s) { return n + s.t.length; }, 0) > 260 || d.segs.reduce(function (n, s) { return n + (s.chips || []).length; }, 0) >= 4) ? ' long' : ''), null); setCol(card, d.k); card.appendChild(h('div', 'mh', d.label)); var p = h('p'); card.appendChild(p); left.appendChild(card);
+    var nCh = d.segs.reduce(function (n, s) { return n + (s.chips || []).length; }, 0), nCh2 = d.segs.reduce(function (n, s) { return n + s.t.length; }, 0);
+    var isLong = CT === 'bar' ? nCh2 > 310 : (nCh2 > 260 || nCh >= 4);
+    var card = h('div', 'mcard' + (isLong ? ' long' : ''), null); setCol(card, d.k); card.appendChild(h('div', 'mh', d.label)); var p = h('p'); card.appendChild(p); left.appendChild(card);
     var chipsLbl = null, chips = null;
     if (d.segs.some(function (s) { return s.chips; })) { chipsLbl = h('div', 'chips-lbl', 'KEY VOCABULARY CHOICES:'); chips = h('div', 'chips'); left.appendChild(chipsLbl); left.appendChild(chips); }
     var c = chartCard(ctx, d); g.appendChild(c);
@@ -135,21 +137,21 @@
     d.items.forEach(function (x) { var e = h('div', 'ck', '<div class="k">' + x[0] + '</div><div><b>' + x[1] + '</b><span>' + x[2] + '</span></div>'); g.appendChild(e); fr(ctx, e); });
     return r;
   };
-  function fullParas() {
-    return D.slides.filter(function (d) { return d.type === 'model'; }).map(function (d) {
+  function fullParas(g) {
+    return D.slides.filter(function (d) { return d.type === 'model' && (d.grp || '') === (g || ''); }).map(function (d) {
       return { k: d.k, label: d.label, html: d.segs.map(function (g) { return kw(g.t); }).join(' ') };
     });
   }
-  function buildFull(box, ctx) {
-    fullParas().forEach(function (x) {
+  function buildFull(box, ctx, g) {
+    fullParas(g).forEach(function (x) {
       var e = h('div', 'fp'); setCol(e, x.k); e.appendChild(h('div', 'mh', x.label)); e.appendChild(h('p', null, x.html)); box.appendChild(e);
       if (ctx) fr(ctx, e);
     });
   }
   R.full = function (d, ctx) {
     var r = h('div'); head(r, d);
-    if (d.withChart) { var g = h('div', 'two fw'); r.appendChild(g); var b0 = h('div', 'fullbox'); g.appendChild(b0); buildFull(b0, ctx); var c0 = chartCard(ctx, d, { h: 360 }); g.appendChild(c0); fr(ctx, c0, {}); return r; }
-    var b = h('div', 'fullbox'); r.appendChild(b); buildFull(b, ctx); return r;
+    if (d.withChart) { var g = h('div', 'two fw'); r.appendChild(g); var b0 = h('div', 'fullbox'); g.appendChild(b0); buildFull(b0, ctx, d.grp); var c0 = chartCard(ctx, d, { h: 360 }); g.appendChild(c0); fr(ctx, c0, {}); return r; }
+    var b = h('div', 'fullbox'); r.appendChild(b); buildFull(b, ctx, d.grp); return r;
   };
   R.matrix = function (d, ctx) {
     var r = h('div'); head(r, d); var g = h('div', 'mx'); g.style.gridTemplateColumns = '150px repeat(' + d.head.length + ',1fr)'; r.appendChild(g);
@@ -179,7 +181,7 @@
       e.innerHTML = '<b>' + x.term + '</b>' + (x.note ? '<div class="vm">' + (x.tag ? '<span class="vt">' + x.tag + '</span>' : '') + '<i>' + kw(x.text) + '</i></div><small>' + x.note + '</small>' : '<i>' + kw(x.text) + '</i>');
       g.appendChild(e); fr(ctx, i === 0 && lb ? [e, lb] : e);
     });
-    if (d.tip) { var tp = h('div', 'vtip', '<b>' + d.tip[0] + '</b>' + d.tip[1]); r.appendChild(tp); fr(ctx, tp); }
+    if (d.tip) { var tp = h('div', 'vtip', '<b>' + d.tip[0] + '</b>' + kw(d.tip[1])); r.appendChild(tp); fr(ctx, tp); }
     return r;
   };
   R.scale = function (d, ctx) {

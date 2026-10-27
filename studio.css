@@ -261,3 +261,9 @@ a.tbtn{text-decoration:none;display:inline-flex;align-items:center}
 
 .tblc thead th.dim,.tblc th.rh.dim{opacity:.5}
 #chart .tblc td{font-size:20px;padding:13px 6px}#chart .tblc th.rh{font-size:16px}#chart .tblc thead th{font-size:14px;padding:11px 6px}#chart .tblc thead th.corner{font-size:12.5px}
+
+/* process: підсвітка мови в тексті */
+mark.lg-pass,.lgchip.lg-pass{background:rgba(44,110,138,.26)}
+mark.lg-act,.lgchip.lg-act{background:rgba(194,24,91,.2)}
+mark.lg-seq,.lgchip.lg-seq{background:rgba(201,168,76,.45)}
+mark.lg-det,.lgchip.lg-det{background:rgba(46,139,87,.26)}

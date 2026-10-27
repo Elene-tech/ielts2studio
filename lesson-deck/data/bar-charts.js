@@ -98,9 +98,9 @@ window.DECK = {
 
     { type: 'dual', section: 'Method', title: '§3 & §4 Body Paragraphs — Group, Don\'t Narrate', sub: 'GROUP YOUR CATEGORIES LOGICALLY — NEVER GO CATEGORY BY CATEGORY — COHERENCE + TASK ACHIEVEMENT',
       cols: [
-        { k: 'gold', head: 'BODY 1 (§3) — the young-spending categories', items: [`Eating out + Video games + Sports — where the under-50s lead.`, `Key data points to hit:`, `· eating out — the top category overall: £120 / £95 / £68`, `· video games — the starkest gap: £62 vs £18 vs £8`, `· sports — same downward direction: £55 → £30`, `All three groups in ONE sentence per category — never bar by bar.`] },
-        { k: 'red', head: 'BODY 2 (§4) — the reversed + similar categories', items: [`Books + Cinema + Streaming — where the pattern flips.`, `Key data points to hit:`, `· books & music — reversed: the oldest lead, £38 vs £14`, `· cinema & theatre — the oldest outspend again: £35`, `· streaming — the exception: «broadly similar» for the two younger groups, £42 vs £38`, `Open with «In contrast, …» — the linker signals the switch of focus.`] }],
-      footnote: 'KEY RULE — group by BEHAVIOUR, not by position on the x-axis. Grouping by age group (§3 the 18–30s, §4 the 51–70s) would also work — pick whichever structure makes your two «big stories» easiest to see.' },
+        { k: 'gold', head: 'BODY 1 (§3) — the young-spending categories', items: [`Eating out + Video games + Sports — where the under-50s lead.`, `Key data points to hit:`, `· eating out — the top category overall: around £120 / £95 / just under £70`, `· video games — the starkest gap: just over £60 vs under £20 vs under £10`, `· sports — same downward direction: about £55 → £30`, `All three groups in ONE sentence per category — never bar by bar.`] },
+        { k: 'red', head: 'BODY 2 (§4) — the reversed + similar categories', items: [`Books + Cinema + Streaming — where the pattern flips.`, `Key data points to hit:`, `· books & music — reversed: the oldest lead, almost £40 vs roughly £15`, `· cinema & theatre — the oldest outspend again: about £35`, `· streaming — the exception: «broadly similar» for the two younger groups, roughly £40 each`, `Open with «In contrast, …» — the linker signals the switch of focus.`] }],
+      footnote: 'ЦИФРИ — наближені: на іспиті біля стовпчиків їх немає, тому кожна цифра йде зі словом наближення (around, roughly, just over, just under, almost).\nKEY RULE — group by BEHAVIOUR, not by position on the x-axis. Grouping by age group (§3 the 18–30s, §4 the 51–70s) would also work — pick whichever structure makes your two «big stories» easiest to see.' },
 
 
     { type: 'model', section: 'Model', title: 'Model Anatomy — §1 Introduction', k: 'blue', label: '§1  INTRODUCTION',
@@ -116,17 +116,17 @@ window.DECK = {
 
     { type: 'model', section: 'Model', title: 'Model Anatomy — §3 Body 1', k: 'gold', label: '§3  BODY 1 — WHERE THE YOUNG LEAD',
       segs: [
-        { t: `Eating out attracted the highest expenditure {{across all groups}}, peaking at £120 among 31–50 year olds — {{noticeably more than}} the £95 of 18–30 year olds and {{far more than}} the £68 recorded by the oldest group.`, hl: { c: [0] },
-          chips: [['① across all groups', 'all three bars inside ONE sentence: the #1 skill of this module'], ['② noticeably … far more than', 'two adverbs matched to two gaps: 26% and 76%']] },
-        { t: `The starkest contrast appeared in video games: £62 for the youngest, {{nearly three and a half times}} the 31–50 figure, {{dwarfing}} the {{negligible}} £8 of the oldest.`, hl: { c: [1] },
-          chips: [['③ multiplier + dwarfing + negligible', 'drama vocabulary for a 7.75× gap']] }] },
+        { t: `Eating out attracted the highest expenditure {{across all groups}}, peaking at {{around}} £120 among 31–50 year olds — {{noticeably more than}} the {{roughly}} £95 of 18–30 year olds and {{far more than}} the {{just under}} £70 recorded by the oldest group.`, hl: { c: [0] },
+          chips: [['① across all groups', 'all three bars inside ONE sentence: the #1 skill of this module'], ['② around · roughly · just under', 'the exam chart shows no exact numbers, so every figure gets an approximation word'], ['③ noticeably … far more than', 'two adverbs matched to two gaps: about a quarter and about three quarters']] },
+        { t: `The starkest contrast appeared in video games: {{just over}} £60 for the youngest, {{more than three times}} the 31–50 figure, {{dwarfing}} the {{negligible}} {{under}} £10 of the oldest.`, hl: { c: [1] },
+          chips: [['④ multiplier + dwarfing + negligible', 'drama vocabulary for a gap of six times and more']] }] },
 
     { type: 'model', section: 'Model', title: 'Model Anatomy — §4 Body 2', k: 'red', label: '§4  BODY 2 — THE PATTERN FLIPS',
       segs: [
-        { t: `{{In contrast}}, books and music showed {{a reversed pattern}}: the 51–70 group spent £38, {{markedly higher than}} the £14 recorded by 18–30 year olds.`, hl: { c: [3] },
+        { t: `{{In contrast}}, books and music showed {{a reversed pattern}}: the 51–70 group spent {{almost}} £40, {{markedly higher than}} the {{roughly}} £15 recorded by 18–30 year olds.`, hl: { c: [3] },
           chips: [['① In contrast', 'opens Body 2 — the signal of the focus switch'], ['② a reversed pattern', 'names the flip in one phrase; «markedly» matches a >60% gap']] },
-        { t: `Cinema followed the same direction, with the oldest group again {{outspending}} both others, while streaming was {{broadly similar}} for the two younger groups, at £42 and £38.`, hl: { c: [4, 5] },
-          chips: [['③ outspending', 'a Band 8 verb: the comparison lives inside the verb'], ['④ broadly similar', 'how to report a near-tie: name the two close figures']] }] },
+        { t: `Cinema followed the same direction, with the oldest group again {{outspending}} both others, while streaming was {{broadly similar}} for the two younger groups, at {{roughly}} £40 each.`, hl: { c: [4, 5] },
+          chips: [['③ outspending', 'a Band 8 verb: the comparison lives inside the verb'], ['④ broadly similar … roughly £40 each', 'how to report a near-tie: one approximate figure for both']] }] },
 
     { type: 'full', withChart: true, section: 'Model', title: 'The Band 8 Model Answer', sub: '~180 WORDS · THE COMPLETE ANSWER — NOW READ IT AS ONE TEXT, WITH THE CHART IN VIEW' },
 

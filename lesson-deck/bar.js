@@ -40,7 +40,7 @@
     });
     host.appendChild(legend);
     function setHL(hl) {
-      hl = hl || {}; var hasC = !!hl.c, hasS = !!hl.s, showV = hl.vals !== undefined ? hl.vals : (hasC || hasS), usedS = {};
+      hl = hl || {}; var hasC = !!hl.c, hasS = !!hl.s, showV = def.noVals ? false : (hl.vals !== undefined ? hl.vals : (hasC || hasS)), usedS = {};
       def.cats.forEach(function (cn, ci) {
         def.series.forEach(function (se, si) {
           var on = (!hasC || hl.c.indexOf(ci) > -1) && (!hasS || hl.s.indexOf(se.id) > -1), b = B[ci][si];

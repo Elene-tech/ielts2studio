@@ -428,3 +428,8 @@ body.nohints .hints{display:none}
 .two.m.pie .mcard.long ~ .chips .chip{font-size:15px}
 .two.m.pie .mcard.long p{font-size:19.5px;line-height:1.4}
 .two.m.pie .mcard.long ~ .chips .chip{font-size:14px;padding:5px 9px}.two.m.pie .mcard.long ~ .chips .chip b{font-size:15px}
+
+/* process: voice-підсвітка (%%passive%% синій, @@active@@ рожевий) */
+mark.pv{background:rgba(44,110,138,.16);color:#1d4f66;border-bottom:2px solid #2C6E8A;border-radius:3px;padding:0 2px;font-weight:700}
+mark.ac{background:rgba(194,24,91,.12);color:#A0124F;border-bottom:2px solid #C2185B;border-radius:3px;padding:0 2px;font-weight:700}
+.t-task .chart-card .prc,.t-task .chart-card svg.prc{max-height:100%}
