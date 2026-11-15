@@ -135,7 +135,7 @@
   };
   R.rewrite = function (d, ctx) {
     var r = h('div'); head(r, d); var g = h('div', 'two r'); r.appendChild(g);
-    var p = h('div', 'rw', d.html); g.appendChild(p); fr(ctx, p);
+    var p = h('div', 'rw', kw(d.html)); g.appendChild(p); fr(ctx, p);
     var l = h('div', 'rlist'); l.appendChild(h('div', 'rl', d.label)); d.items.forEach(function (x) { l.appendChild(h('div', 'ri', '<b>' + x[0] + '</b><i>' + x[1] + '</i>')); }); g.appendChild(l); fr(ctx, l);
     return r;
   };
