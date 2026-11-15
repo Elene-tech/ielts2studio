@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Language of Location · Write It Right</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="place.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand"><b>Target English</b><span>Write It Right · IELTS Writing Task 1</span></div>
+  <div class="ttl">Language of Location · постав на місце</div>
+  <div class="tools"><a class="tbtn" id="lnkTheory" href="../lesson-deck/index.html?m=maps">← Теорія</a> <a class="tbtn" id="lnkStudio" href="../index.html?t=maps-1">Пишемо разом</a></div>
+</header>
+<main>
+  <section class="left card">
+    <div class="lvls" id="lvls"></div>
+    <p class="intro" id="intro"></p>
+    <div class="mapbox"><div id="map"></div></div>
+    <p class="mapnote" id="mapnote"></p>
+  </section>
+  <section class="right">
+    <div class="prog" id="prog"></div>
+    <div class="tcard" id="tcard">
+      <div class="ttop"><span class="chip" id="chip"></span><span class="cnt" id="cnt"></span></div>
+      <div class="tq" id="tq"></div>
+      <div class="tray" id="tray"></div>
+      <div class="opts" id="opts"></div>
+      <div class="fb" id="fb" hidden></div>
+      <div class="act"><button class="tbtn pri" id="next" hidden>Далі →</button><span class="kh" id="kh"></span></div>
+    </div>
+    <div class="sum" id="sum" hidden></div>
+  </section>
+</main>
+<script src="../modules.js"></script>
+<script src="map.js"></script>
+<script>var t=(new URLSearchParams(location.search).get("t")||"place-1").replace(/[^a-z0-9-]/g,"");document.write('<script src="data/'+t+'.js"><\/script>');</script>
+<script src="place.js"></script>
+</body>
+</html>

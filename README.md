@@ -35,3 +35,12 @@
 Діаграми процесів малює `process.js` (ProcessChart): `layout:'flow'` (змійка), `'cycle'` (коло), `'branch'` (гілки); кожна картка має номер, емодзі, назву, пояснення й (за кнопкою voice) підпис PASSIVE або ACTIVE з дієсловом.
 Завдання: `index.html?t=process-1` (man-made, olive oil) і `index.html?t=process-2` (природний цикл, water cycle). Диктант: `dictation/index.html?t=process-1` (honey, змішаний процес), аудіо кладеться в `dictation/audio/process-1/01–10.mp3`. Колода: `lesson-deck/index.html?m=process`.
 У колоді розмітка тексту: `%%passive%%` синім, `@@active@@` рожевим.
+
+## Module 6 · Maps
+
+- Колода: `lesson-deck/index.html?m=maps` (40 слайдів: карта з компасом І план будівлі, мова місця, типи змін, часи, дві моделі, практика Linden Lake).
+- Пишемо разом: `index.html?t=maps-1` (Kestrel Island, компас, 1995 → 2020) і `index.html?t=maps-2` (Eastgate Station, план без компаса, current → proposed, will be).
+- Диктант: `dictation/index.html?t=maps-1` (Hartwell campus, план). Аудіо: `dictation/audio/maps-1/01–10.mp3`. Текст для ElevenLabs: `Maps_dictation_script.txt`.
+- «Місце» (новий інтерактив, перетягни об’єкт на місце за описом): `place/index.html?t=place-1` (три рівні: карта з компасом, план вокзалу, кампус). Результат зберігається в браузері. Для Kwiga: окремий embed.
+- Усі карти малює `map.js` + `map-scenes.js` (однакові копії лежать у корені, `lesson-deck/`, `dictation/`, `place/`). Нова карта = новий об’єкт у `map-scenes.js`.
+- Не забудь залити також `dictation/audio/table-1/` (Tables), якщо ще не залила.

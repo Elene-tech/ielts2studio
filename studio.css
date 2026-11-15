@@ -267,3 +267,7 @@ mark.lg-pass,.lgchip.lg-pass{background:rgba(44,110,138,.26)}
 mark.lg-act,.lgchip.lg-act{background:rgba(194,24,91,.2)}
 mark.lg-seq,.lgchip.lg-seq{background:rgba(201,168,76,.45)}
 mark.lg-det,.lgchip.lg-det{background:rgba(46,139,87,.26)}
+/* Module 6: Maps — групи мови */
+mark.lg-loc,.lgchip.lg-loc{background:rgba(232,83,15,.24)}
+mark.lg-chg,.lgchip.lg-chg{background:rgba(194,24,91,.2)}
+mark.lg-kept,.lgchip.lg-kept{background:rgba(46,139,87,.26)}

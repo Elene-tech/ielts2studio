@@ -22,7 +22,7 @@
   function chartCard(ctx, d, o) {
     o = o || {};
     var CH = d.chart || D.chart, c = h('div', 'chart-card'); c.appendChild(h('div', 'ct', CH.title)); if (CH.fmt) c.appendChild(h('div', 'apx', '≈ значення зчитані наближено: на іспиті точних цифр немає'));
-    ctx.chart = (CH.type === 'process' ? window.ProcessChart : CH.type === 'pie' ? window.PieChart : CH.type === 'bar' ? window.BarChart : CH.type === 'table' ? window.TableChart : window.LineChart)(c, CH, { h: o.h || (CH.type === 'pie' ? 340 : CH.type === 'bar' ? 380 : 410), wide: !!o.wide });
+    ctx.chart = (CH.type === 'map' ? function (c0, d0) { return window.MapChart(c0, d0, {}); } : CH.type === 'process' ? window.ProcessChart : CH.type === 'pie' ? window.PieChart : CH.type === 'bar' ? window.BarChart : CH.type === 'table' ? window.TableChart : window.LineChart)(c, CH, { h: o.h || (CH.type === 'pie' ? 340 : CH.type === 'bar' ? 380 : 410), wide: !!o.wide });
     return c;
   }
 
@@ -100,11 +100,11 @@
   };
   R.quad = function (d, ctx) {
     var r = h('div'); head(r, d); var g = h('div', 'quad'); r.appendChild(g);
-    d.boxes.forEach(function (b) { var e = h('div', 'qd'); setCol(e, b.k); e.appendChild(h('h4', null, b.head)); b.items.forEach(function (t) { e.appendChild(h('p', null, t)); }); g.appendChild(e); fr(ctx, e); });
+    d.boxes.forEach(function (b) { var e = h('div', 'qd'); setCol(e, b.k); e.appendChild(h('h4', null, b.head)); b.items.forEach(function (t) { e.appendChild(h('p', null, kw(t))); }); g.appendChild(e); fr(ctx, e); });
     return r;
   };
   R.model = function (d, ctx) {
-    var CT = (d.chart || D.chart).type, r = h('div'); head(r, d); var g = h('div', 'two m' + (CT === 'pie' || CT === 'bar' || CT === 'table' || CT === 'process' ? ' pie' : '')); r.appendChild(g);
+    var CT = (d.chart || D.chart).type, r = h('div'); head(r, d); var g = h('div', 'two m' + (CT === 'map' ? ' map' : '') + (CT === 'pie' || CT === 'bar' || CT === 'table' || CT === 'process' ? ' pie' : '')); r.appendChild(g);
     var left = h('div', 'mcol'); g.appendChild(left);
     var nCh = d.segs.reduce(function (n, s) { return n + (s.chips || []).length; }, 0), nCh2 = d.segs.reduce(function (n, s) { return n + s.t.length; }, 0);
     var isLong = CT === 'bar' ? nCh2 > 310 : (nCh2 > 260 || nCh >= 4);
@@ -120,6 +120,18 @@
       fr(ctx, els, s.hl, sp);
     });
     return r;
+  };
+  R.mapview = function (d, ctx) {
+    var r = h('div'); head(r, d); var c = chartCard(ctx, d, { wide: true }); c.classList.add('mapc'); r.appendChild(c);
+    var g = h('div', 'mnotes n' + d.notes.length); r.appendChild(g);
+    d.notes.forEach(function (x) {
+      var e = h('div', 'mn', '<b>' + kw(x.head) + '</b><span>' + kw(x.text) + '</span>'); setCol(e, x.k || 'green'); g.appendChild(e); fr(ctx, e, x.hl, e);
+    });
+    return r;
+  };
+  R.embed = function (d, ctx) {
+    var r = h('div'); head(r, d); var w = h('div', 'embedbox'); var fm = h('iframe'); fm.src = d.src; fm.setAttribute('loading', 'lazy'); fm.title = d.title; w.appendChild(fm); r.appendChild(w);
+    if (d.footnote) { /* додається нижче */ } return r;
   };
   R.rewrite = function (d, ctx) {
     var r = h('div'); head(r, d); var g = h('div', 'two r'); r.appendChild(g);
@@ -198,7 +210,7 @@
     var g = h('div', 'kv'); r.appendChild(g); var l = h('div', 'kvl'); g.appendChild(l);
     d.rows.forEach(function (x) { var e = h('div', 'kr', '<b>' + x[0] + '</b><span>' + x[1] + '</span>'); l.appendChild(e); fr(ctx, e); });
     var n = h('div', 'kn'); n.appendChild(h('small', null, d.nextLabel)); d.next.forEach(function (x) { n.appendChild(h('div', null, '<b>' + x[0] + '</b>' + x[1])); }); g.appendChild(n); fr(ctx, n);
-    if (d.links) { var w = h('div', 'endlinks'); d.links.forEach(function (x) { var a = h('a', 'endlink', x.label); a.href = x.url; w.appendChild(a); }); r.appendChild(w); fr(ctx, w); }
+    if (d.links) { var w = h('div', 'endlinks'); d.links.forEach(function (x) { var a = h('a', 'endlink', x.label); a.href = x.url; if (x.blank) a.target = '_blank'; w.appendChild(a); }); r.appendChild(w); fr(ctx, w); }
     return r;
   };
   R.end = function (d, ctx) {

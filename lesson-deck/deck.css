@@ -433,3 +433,25 @@ body.nohints .hints{display:none}
 mark.pv{background:rgba(44,110,138,.16);color:#1d4f66;border-bottom:2px solid #2C6E8A;border-radius:3px;padding:0 2px;font-weight:700}
 mark.ac{background:rgba(194,24,91,.12);color:#A0124F;border-bottom:2px solid #C2185B;border-radius:3px;padding:0 2px;font-weight:700}
 .t-task .chart-card .prc,.t-task .chart-card svg.prc{max-height:100%}
+
+/* ---------- Module 6: Maps ---------- */
+.chart-card.mapc{flex:1;min-height:0;padding:6px 12px 4px}
+.chart-card.mapc .ct{font-size:15px}
+.mnotes{display:grid;gap:10px;margin-top:10px}
+.mnotes.n2{grid-template-columns:repeat(2,1fr)}.mnotes.n3{grid-template-columns:repeat(3,1fr)}.mnotes.n4{grid-template-columns:repeat(4,1fr)}
+.mn{background:var(--b);border:1.5px solid var(--c);border-left:6px solid var(--c);border-radius:11px;padding:8px 13px;display:flex;flex-direction:column;gap:3px;transition:box-shadow .3s,border-color .3s}
+.mn b{font-size:16px;color:var(--c);line-height:1.2}.mn span{font-size:14px;line-height:1.35;color:var(--txt)}
+.mn.cur{border-color:var(--gold);border-left-color:var(--gold);box-shadow:0 3px 14px rgba(201,168,76,.32)}
+.two.m.map{grid-template-columns:1fr;grid-template-rows:296px 1fr;gap:10px}
+.two.m.map .chart-card{order:-1;margin-top:0;padding:4px 12px}
+.two.m.map .mcol{flex-direction:row;gap:12px;align-items:stretch}
+.two.m.map .mcard{flex:1.35;padding:10px 16px}.two.m.map .mcard p{font-size:16.5px;line-height:1.5}
+.two.m.map .chips-lbl{display:none}
+.two.m.map .chips{flex:1;display:flex;flex-direction:column;gap:6px;min-width:0}
+.two.m.map .chip{padding:6px 10px;font-size:12.5px;line-height:1.25}.two.m.map .chip b{font-size:13.5px}
+.embedbox{flex:1;min-height:0;border:1.5px solid #e3ddcf;border-radius:14px;overflow:hidden;background:#fff;margin-top:8px}
+.embedbox iframe{width:100%;height:100%;border:0;display:block}
+#stage .two.m.map,#stage:not([data-face="right"]) .two.m.map{grid-template-columns:minmax(0,1fr);grid-template-rows:300px 1fr}
+#stage .two.m.map .mcol{min-width:0}
+#stage .two.m.map .chips{display:flex;flex-direction:column;flex-wrap:nowrap;flex:1;min-width:0;gap:5px}
+#stage .two.m.map .chip{width:auto;max-width:none;flex:0 0 auto;padding:5px 10px}
