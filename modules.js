@@ -9,12 +9,13 @@
     { n: 3, name: 'Bar Charts',       m: 'bar-charts', t: 'bar-1',  theory: 'lesson-deck/index.html?m=bar-charts', studio: 'index.html?t=bar-1',  dict: 'dictation/index.html?t=bar-1' },
     { n: 4, name: 'Tables',           m: 'tables',     t: 'table-1', theory: 'lesson-deck/index.html?m=tables',     studio: 'index.html?t=table-1', dict: 'dictation/index.html?t=table-1' },
     { n: 5, name: 'Process Diagrams', m: 'process', t: 'process-1', t2: 'process-2', theory: 'lesson-deck/index.html?m=process', studio: 'index.html?t=process-1', studio2: 'index.html?t=process-2', dict: 'dictation/index.html?t=process-1' },
-    { n: 6, name: 'Maps', m: 'maps', t: 'maps-1', t2: 'maps-2', theory: 'lesson-deck/index.html?m=maps', studio: 'index.html?t=maps-1', studio2: 'index.html?t=maps-2', dict: 'dictation/index.html?t=maps-1', place: 'place/index.html?t=place-1', placeId: 'place-1' }
+    { n: 6, name: 'Maps', m: 'maps', t: 'maps-1', t2: 'maps-2', theory: 'lesson-deck/index.html?m=maps', studio: 'index.html?t=maps-1', studio2: 'index.html?t=maps-2', dict: 'dictation/index.html?t=maps-1', place: 'place/index.html?t=place-1', placeId: 'place-1' },
+    { n: 7, name: 'Scatter Graphs', m: 'scatter', t: 'scatter-1', t2: 'scatter-2', theory: 'lesson-deck/index.html?m=scatter', studio: 'index.html?t=scatter-1', studio2: 'index.html?t=scatter-2', dict: 'dictation/index.html?t=scatter-1', place: 'scatter-lab/index.html?t=lab-1', placeId: 'lab-1' }
   ];
   var q = new URLSearchParams(location.search);
-  var part = /lesson-deck/.test(location.pathname) ? 'theory' : /dictation/.test(location.pathname) ? 'dict' : /\/place\//.test(location.pathname) ? 'place' : 'studio';
+  var part = /lesson-deck/.test(location.pathname) ? 'theory' : /dictation/.test(location.pathname) ? 'dict' : /\/(place|scatter-lab)\//.test(location.pathname) ? 'place' : 'studio';
   var curM = part === 'theory' ? (q.get('m') || 'line-graph') : null;
-  var curT = part !== 'theory' ? (q.get('t') || (part === 'place' ? 'place-1' : 'line-1')) : null;
+  var curT = part !== 'theory' ? (q.get('t') || (part === 'place' ? (/scatter-lab/.test(location.pathname) ? 'lab-1' : 'place-1') : 'line-1')) : null;
 
   var css = document.createElement('style');
   css.textContent = '.brand.mm{cursor:pointer;user-select:none;position:relative}.brand.mm b::after{content:" ▾";font-size:.8em;opacity:.7}' +
@@ -33,7 +34,7 @@
     var cur = !x.soon && (curM === x.m || curT === x.t || (x.t2 && curT === x.t2) || (x.placeId && curT === x.placeId));
     if (x.soon) { h += '<div class="mr soon"><span class="mn"><i>' + x.n + '</i>' + x.name + '</span><em>скоро</em></div>'; return; }
     function a(k, label) { var on = cur && (part === 'studio' ? (k === 'studio' ? curT !== x.t2 : k === 'studio2') : part === k); return '<a class="' + (on ? 'on' : '') + '" href="' + ROOT + x[k] + '">' + label + '</a>'; }
-    h += '<div class="mr' + (cur ? ' cur' : '') + '"><span class="mn"><i>' + x.n + '</i>' + x.name + '</span>' + a('theory', 'Теорія') + a('studio', 'Пишемо') + (x.studio2 ? a('studio2', x.m === 'maps' ? 'План' : 'Цикл') : '') + a('dict', 'Диктант') + (x.place ? a('place', 'Місце') : '') + '</div>';
+    h += '<div class="mr' + (cur ? ' cur' : '') + '"><span class="mn"><i>' + x.n + '</i>' + x.name + '</span>' + a('theory', 'Теорія') + a('studio', 'Пишемо') + (x.studio2 ? a('studio2', x.m === 'maps' ? 'План' : x.m === 'scatter' ? 'Групи' : 'Цикл') : '') + a('dict', 'Диктант') + (x.place ? a('place', x.m === 'scatter' ? 'Лабораторія' : 'Місце') : '') + '</div>';
   });
   menu.innerHTML = h;
 

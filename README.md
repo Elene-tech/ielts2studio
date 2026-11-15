@@ -44,3 +44,11 @@
 - «Місце» (новий інтерактив, перетягни об’єкт на місце за описом): `place/index.html?t=place-1` (три рівні: карта з компасом, план вокзалу, кампус). Результат зберігається в браузері. Для Kwiga: окремий embed.
 - Усі карти малює `map.js` + `map-scenes.js` (однакові копії лежать у корені, `lesson-deck/`, `dictation/`, `place/`). Нова карта = новий об’єкт у `map-scenes.js`.
 - Не забудь залити також `dictation/audio/table-1/` (Tables), якщо ще не залила.
+
+## Module 7 · Scatter Graphs
+
+- Колода: `lesson-deck/index.html?m=scatter` (38 слайдів: що таке scatter, кореляція, тренд, викид, групи, мова зв’язку, часи, три моделі, практика).
+- Пишемо разом: `index.html?t=scatter-1` (опалення й температура, викид) і `index.html?t=scatter-2` (дві групи магазинів).
+- Диктант: `dictation/index.html?t=scatter-1` (сонячні панелі, викид). Аудіо: `dictation/audio/scatter-1/01–10.mp3`. Текст для ElevenLabs: `Scatter_dictation_script.txt`.
+- «Scatter Lab» (інтерактив: 1) побудуй scatter, перетягуючи точки; 2) прочитай графік): `scatter-lab/index.html?t=lab-1`. Результат зберігається в браузері.
+- Усі графіки малює `scatter.js` + `scatter-scenes.js` (однакові копії в корені, `lesson-deck/`, `dictation/`, `scatter-lab/`). Модуль «Mixed Tasks» тепер Модуль 8 (нумерація в `modules.js`).
