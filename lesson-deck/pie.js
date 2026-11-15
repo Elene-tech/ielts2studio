@@ -7,7 +7,7 @@
   function add(p, tag, a, text) { var e = document.createElementNS(NS, tag); for (var k in a) e.setAttribute(k, a[k]); if (text !== undefined) e.textContent = text; p.appendChild(e); return e; }
   window.PieChart = function (host, def, opts) {
     opts = opts || {};
-    var W = 680, H = opts.h || 330, n = def.charts.length, R = Math.min(120, (W / n) / 2 - 30), CY = 40 + (H - 40) / 2 + 6;
+    var W = 680, H = opts.h || 330, n = def.charts.length, R = opts.R || Math.min(120, (W / n) / 2 - 30), CY = 40 + (H - 40) / 2 + 6;
     var svg = document.createElementNS(NS, 'svg'); svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H); svg.setAttribute('class', 'lc pie'); svg.setAttribute('role', 'img'); svg.setAttribute('aria-label', def.title || '');
     var C = {};
     def.charts.forEach(function (ch, ci) {

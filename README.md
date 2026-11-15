@@ -52,3 +52,12 @@
 - Диктант: `dictation/index.html?t=scatter-1` (сонячні панелі, викид). Аудіо: `dictation/audio/scatter-1/01–10.mp3`. Текст для ElevenLabs: `Scatter_dictation_script.txt`.
 - «Scatter Lab» (інтерактив: 1) побудуй scatter, перетягуючи точки; 2) прочитай графік): `scatter-lab/index.html?t=lab-1`. Результат зберігається в браузері.
 - Усі графіки малює `scatter.js` + `scatter-scenes.js` (однакові копії в корені, `lesson-deck/`, `dictation/`, `scatter-lab/`). Модуль «Mixed Tasks» тепер Модуль 8 (нумерація в `modules.js`).
+
+## Module 8 · Mixed Graphs
+
+- Колода: `lesson-deck/index.html?m=mixed` (33 слайди: що таке mixed task, читання двох графіків, структура, мова зв'язку, дві моделі: line + pie і bar + table, практика).
+- Пишемо разом: `index.html?t=mixed-1` (bar chart + pie chart: онлайн-шопінг) і `index.html?t=mixed-2` (line graph + table: два міста).
+- Диктант: `dictation/index.html?t=mixed-1` (клімат: лінії температури + стовпчики опадів). Аудіо: `dictation/audio/mixed-1/01–10.mp3`. Текст для ElevenLabs: `Mixed_dictation_script.txt`.
+- «Mixed Lab» (інтерактив: 1) до якого графіка належить речення; 2) обери точне речення для пари графіків): `mixed-lab/index.html?t=mlab-1`. Результат зберігається в браузері.
+- Два графіки поруч малює `mixed.js` + `mixed-scenes.js` (однакові копії в корені, `lesson-deck/`, `dictation/`, `mixed-lab/`). `mixed.js` складає пару з існуючих `chart.js` (line), `bar.js`, `pie.js`, `table.js`. Нова пара = новий об'єкт у `mixed-scenes.js`.
+- `pie.js` отримав параметр `opts.R` (радіус кола), для малих діаграм у парі. `chart.js` тепер лежить і в корені (для Studio).

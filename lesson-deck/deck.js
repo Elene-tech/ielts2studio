@@ -22,7 +22,7 @@
   function chartCard(ctx, d, o) {
     o = o || {};
     var CH = d.chart || D.chart, c = h('div', 'chart-card'); c.appendChild(h('div', 'ct', CH.title)); if (CH.fmt) c.appendChild(h('div', 'apx', '≈ значення зчитані наближено: на іспиті точних цифр немає'));
-    ctx.chart = (CH.type === 'scatter' ? function (c0, d0) { return window.ScatterChart(c0, d0, { h: 380 }); } : CH.type === 'map' ? function (c0, d0) { return window.MapChart(c0, d0, {}); } : CH.type === 'process' ? window.ProcessChart : CH.type === 'pie' ? window.PieChart : CH.type === 'bar' ? window.BarChart : CH.type === 'table' ? window.TableChart : window.LineChart)(c, CH, { h: o.h || (CH.type === 'pie' ? 340 : CH.type === 'bar' ? 380 : 410), wide: !!o.wide });
+    ctx.chart = CH.type === 'mixed' ? window.MixedChart(c, CH, { row: !!o.wide, h: o.wide ? { line: 300, bar: 320, pie: 300 } : { line: 170, bar: 185, pie: 180 }, R: o.wide ? 0 : 60 }) : (CH.type === 'scatter' ? function (c0, d0) { return window.ScatterChart(c0, d0, { h: 380 }); } : CH.type === 'map' ? function (c0, d0) { return window.MapChart(c0, d0, {}); } : CH.type === 'process' ? window.ProcessChart : CH.type === 'pie' ? window.PieChart : CH.type === 'bar' ? window.BarChart : CH.type === 'table' ? window.TableChart : window.LineChart)(c, CH, { h: o.h || (CH.type === 'pie' ? 340 : CH.type === 'bar' ? 380 : 410), wide: !!o.wide });
     return c;
   }
 
@@ -104,7 +104,7 @@
     return r;
   };
   R.model = function (d, ctx) {
-    var CT = (d.chart || D.chart).type, r = h('div'); head(r, d); var g = h('div', 'two m' + (CT === 'map' ? ' map' : '') + (CT === 'pie' || CT === 'bar' || CT === 'table' || CT === 'process' || CT === 'scatter' ? ' pie' : '')); r.appendChild(g);
+    var CT = (d.chart || D.chart).type, r = h('div'); head(r, d); var g = h('div', 'two m' + (CT === 'map' ? ' map' : '') + (CT === 'pie' || CT === 'bar' || CT === 'table' || CT === 'process' || CT === 'scatter' || CT === 'mixed' ? ' pie' : '')); r.appendChild(g);
     var left = h('div', 'mcol'); g.appendChild(left);
     var nCh = d.segs.reduce(function (n, s) { return n + (s.chips || []).length; }, 0), nCh2 = d.segs.reduce(function (n, s) { return n + s.t.length; }, 0);
     var isLong = CT === 'bar' ? nCh2 > 310 : (nCh2 > 260 || nCh >= 4);

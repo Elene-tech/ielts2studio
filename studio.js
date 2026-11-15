@@ -85,9 +85,9 @@
     });
     var gTags = add(svg, 'g', { 'class': 'tags' });
     var pie = null;
-    if (C.type === 'pie' || C.type === 'bar' || C.type === 'table' || C.type === 'process' || C.type === 'map' || C.type === 'scatter') {
+    if (C.type === 'pie' || C.type === 'bar' || C.type === 'table' || C.type === 'process' || C.type === 'map' || C.type === 'scatter' || C.type === 'mixed') {
       $('chart').classList.add('piehost'); $('legend').hidden = true;
-      pie = C.type === 'scatter' ? window.ScatterChart($('chart'), C, { h: 380 }) : C.type === 'map' ? window.MapChart($('chart'), C, { stack: true }) : (C.type === 'process' ? window.ProcessChart : C.type === 'table' ? window.TableChart : C.type === 'bar' ? window.BarChart : window.PieChart)($('chart'), C, { h: 360 });
+      pie = C.type === 'mixed' ? window.MixedChart($('chart'), C, { h: { line: 200, bar: 205, pie: 195 }, R: 60 }) : C.type === 'scatter' ? window.ScatterChart($('chart'), C, { h: 380 }) : C.type === 'map' ? window.MapChart($('chart'), C, { stack: true }) : (C.type === 'process' ? window.ProcessChart : C.type === 'table' ? window.TableChart : C.type === 'bar' ? window.BarChart : window.PieChart)($('chart'), C, { h: 360 });
     } else $('chart').appendChild(svg);
 
     /* легенда */

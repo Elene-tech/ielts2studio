@@ -290,7 +290,7 @@
           ['Quantify', 'roughly · from about … to … · between … and … · the highest figure. Ranges, not lists.'],
           ['Report', 'Relationship, not reason. The outlier gets its own sentence; groups are compared at the same level.'],
           ['Shape', '§1 two variables · §2 direction + strength + exception · §3 main trend · §4 outlier or second group.']],
-        nextLabel: 'NEXT STEP', next: [['Writing Studio', 'Write your own scatter answer with the 4-paragraph tool'], ['Module 8', 'Mixed Tasks — Choosing Your Strategy']],
+        nextLabel: 'NEXT STEP', next: [['Writing Studio', 'Write your own scatter answer with the 4-paragraph tool'], ['Module 8', 'Mixed Graphs — Two Charts, One Answer']],
         links: [{ label: 'Пишемо разом →', url: '../index.html?t=scatter-1' }, { label: 'Диктант →', url: '../dictation/index.html?t=scatter-1' }, { label: 'Scatter Lab →', url: '../scatter-lab/index.html?t=lab-1' }] }
     ]
   };
